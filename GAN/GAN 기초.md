@@ -178,7 +178,7 @@ G_loss = torch.mean((D(G(z))-1)**2)
 - 좋은 upsampling을 찾아야 하지 않을까-
 - Deconvolution을 많이 사용했었는데 이건 output을 불균형하게 생김(체크보드 패턴처럼 이미지가 생김)
 - Resize-Convolution을 사용하면 up sampling은 룰베이스 방식으로 한 후, convolution stride=1을 하고 필터링을 여러 레이어로 쌓게 됨! - 골고루 고려할 수 있음
-- BEGAN에선 resize-convlution을 사용했음
+- BEGAN에선 resize-convolution을 사용했음
 
 ### Machine Translation (Seq2Seq)
 
