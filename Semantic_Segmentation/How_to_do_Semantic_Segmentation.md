@@ -70,4 +70,18 @@ R-CNN은 높은 구분적인 CNN 특징들을 사용해 퍼포먼스 개선을 �
 
 ![img](https://cdn-images-1.medium.com/max/1200/1*Aa2fKFN2PEKmMQoy8ps-lw.png)
 
-오리지널 Fully Convolutional Network(FCN)은 픽셀에서 픽셀로 mapping하는 것을 학습시킨다. FCN Network 파이프라인은 기본 CNN을 확장시킨다. 주요한 개념은 전통적인 CNN을 
+오리지널 Fully Convolutional Network(FCN)은 픽셀에서 픽셀로 mapping하는 것을 학습시킨다. FCN Network 파이프라인은 기본 CNN을 확장시킨다. 주요한 개념은 클래식한 CNN을 만드는 것이고, 그 CNN은 임의의 사이즈를 가진 이미지를 input으로 받는다. 특정한 사이즈의 인풋에 대한 label만 받아들이는 CNN의 한계점은 고정된 fully-connectec layer로부터 비롯된다. 이와 반대로, FCN은 오직 Convolutional layer와 Pooling Layer만을 가지고 있기 때문에, 임의의 크기의 입력에 대한 예측을 만들어낼 수 있다. 이 FCN의 한가지 문제점은 여러가지 Convolutional 과 Pooling Layer를 번갈아 전파함으로써 출력 feature 맵 해상도가 다운 샘플링된다는 점이다.
+
+따라서, FCN의 직접적인 예측은 일반적으로 해상도가 낮아 상대적으로 퍼지는 object boundary들을 결과로 낸다. SegNet, DeepLab-CRF, Dilated Convolution을 포함한 다양한 고급 FCN 기반의 접근법들이 제안되었다.
+
+
+
+### 3 - Weakly Supervised Semantic Segmentation
+
+Semantic segmentation에서 대부분의 방법들은 픽셀 단위 segmentation mask를 사용하는 많은 수의 이미지에 의존한다. 그러나 수동적으로 이 mask들에 주석을 다는 것은 꽤 오랜 시간이 소모되고, 실망스럽고 경제적으로 비싸다. 그러므로 몇몇 약한 supervised 방법들이 제안되었는데, 이것은 주석된 바운딩 박스를 이용하여 semantic segmentation을 충족시키는 데 전념한다.
+
+![img](https://cdn-images-1.medium.com/max/1200/1*Zti4CyayplzrKnIJIQfb_Q.jpeg)
+
+
+
+예를 들어, Boxsup은 네트워크를 교육하고 semantic segmentation을 위해 추정된 mask를 반복적으로 개선하기 위해 바운딩 박스 주석을 supervision으로 사용했다. 약한 supervision 제한을 입력 label 잡음의 문제로 취급하고 재귀적인 training을 탐구했다. 픽셀 수준 labeling은 다중 인스턴스 학습 프레임워크 내에서 segmentation 작업을 해석하고 이미지 수준 분류를 위해 중요한 픽셀에 더 많은 가중치를 할당하도록 모델을 제한하는 추가 레이어를 추가했다.
