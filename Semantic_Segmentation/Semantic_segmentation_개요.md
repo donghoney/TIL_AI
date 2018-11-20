@@ -54,7 +54,7 @@ FCN의 Architecture는 크게 3단계정도로 나뉜다.
 ![FCN](https://i.imgur.com/uCL3VC5.jpg)
 
 - Feature를 추출하는 Convolution 단계
-- 뽑아낸 future에 대해 pixelwise prediction 단계
+- 뽑아낸 feature에 대해 pixelwise prediction 단계
 - classification을 한뒤 각 원래의 크기로 만들기 위한 Upsampling 단계
 
 이러한 단계를 거친 후 각 pixel에 class따라 색칠을 한뒤 Segmentation 결과를 보여준다. 세부적인 Architecture에 대한 소개를 하기보단 여기서 사용된 주요한 개념들에 대해서 소개를 한다.

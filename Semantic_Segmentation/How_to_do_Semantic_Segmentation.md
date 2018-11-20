@@ -237,7 +237,6 @@ def train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_l
 
 ```python
 def run():
-    
     #Download pretrained vgg model
     helper.maybe_download_pretrained_vgg(data_dir)
     
@@ -245,7 +244,6 @@ def run():
     get_batches_fn = helper.gen_batch_function(training_dir,image_shape)
     
     with tf.Session() as session:
-        
         #Returns the three layers, keep probability and input layer from the vgg architecture
         image_input , keep_prob, layer3, layer4, layer7 = load_vgg(session,vgg_path)
         #The resulting network architecture from adding a decoder on top of the given vgg model

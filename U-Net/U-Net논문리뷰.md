@@ -22,7 +22,7 @@
 ### 1 . Instroduction
 
 * 논문에서 처음 소개하는 내용은 지난 2년동안(U-Net은 2015년 5월에 발표) deep convolution network는 많은 visual recognition 작업에서 매우 좋은 성능을 보였지만, training set의 크기와 고려할 네트워크의 크기 때문에 그 성공은 제한적이었다고 말하고 있습니다.
-* Convolution Network의 일반적인 용도는 이미지에 대한 출력이 단일 클래스 레이블인 불류 작업에 있지만, 많은 시각 작업, 특히  biomedical processing에서 원하는 출력은 localization을 포함해야 하며, 즉 클래스 라벨은 각 pixel에 할당되어야 한다고 합니다.
+* Convolution Network의 일반적인 용도는 이미지에 대한 출력이 단일 클래스 레이블인 분류 작업에 있지만, 많은 시각 작업, 특히  biomedical processing에서 원하는 출력은 localization을 포함해야 하며, 즉 클래스 라벨은 각 pixel에 할당되어야 한다고 합니다.
 * U-Net의 핵심
   * Convolution Encoder에 해당하는 Contracting Path + Convolution Decoder에 해당하는 Expanding Path의 구조로 구성. (해당 구조는 Fully Convolution + Deconvolution 구조의 조합)
   * Expanding Path 에서 Upsampling 할 때, 좀 더 정확한 Loacalization을 하기 위해서 Contracting Path 의 Feature를 Copy and Crop하여 Concat하는 구조.
@@ -39,10 +39,10 @@
 ![U net fig 2에 대한 이미지 검색결과](http://openresearch.ai/uploads/default/original/1X/9db500ba287c18df96388b6250d9e6a571c0759b.jpg)
 
 * Overlap-tile 전략은, U-Net에서 다루는 전자 현미경 데이터의 특성 상 이미지 사이즈의 크기가 상당히 크기 때문에 Patch 단위로 잘라서 Input으로 넣고 있습니다.
-* 이 때, Fig.2 에서 보는 것과 같이 Border 부분에 정보가 없는 빈 부분을 0으로 채우거나, 주변의 값들로 채우거나 이런 방뻐이 아닌 Mirroring 방법으로 pixel의 값을 채워주는 방법입니다
-* 노란색 영역이 실제 세크멘테이션 될 영역이고 , 파랑색 부분이 Patch입니다.
+* 이 때, Fig.2 에서 보는 것과 같이 Border 부분에 정보가 없는 빈 부분을 0으로 채우거나, 주변의 값들로 채우거나 이런 방법이 아닌 Mirroring 방법으로 pixel의 값을 채워주는 방법입니다
+* 노란색 영역이 실제 세그멘테이션 될 영역이고 , 파랑색 부분이 Patch입니다.
 * 그림을 확대해서 자세히 보시면, 거울처럼 반사되어 Border부분이 채워진 것을 확인 할 수 있었습니다.
-* Overlap-tile이라는 이름은, 파랑색 부분이 Patch 단위로 잘라서 세크멘테이션을 하게 되는데 이 부분이 아래 그림처럼 겹쳐서 뜯어내서 학습시키기 때문인 것 같습니다.
+* Overlap-tile이라는 이름은, 파랑색 부분이 Patch 단위로 잘라서 세그멘테이션을 하게 되는데 이 부분이 아래 그림처럼 겹쳐서 뜯어내서 학습시키기 때문인 것 같습니다.
 
 ### 2 . Network Architecture
 
