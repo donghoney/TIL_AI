@@ -35,4 +35,3 @@ References
 
 
 ***** DeepLab-v3+ is not used to power Pixel 2's portrait mode or real time video segmentation. These are mentioned in the post as examples of features this type of technology can enable.[↩](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html#top1)
-
