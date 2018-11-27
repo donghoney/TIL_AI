@@ -53,7 +53,7 @@
       * ROI Ensemble 기법 활용 . 30fps 달성
       * Selective Knowledge Distillation : Teacher Network 를 활용. unlabeled data에서 label 추출 후 선택적으로 활용
     * Segementation
-      * Nfs-Seg(Samsung SAIT)
+      * Nfs-Seg(Samsung system lsi)
       * SegNet , ENet, PSNet 등등 보다 빠르고 정확한 성능을 보였음. 조사 필요
       * DeepLab V3+가 성능이 2018년 11월 기준으로 가장 정확하다. 
     * 3D Object Detection
