@@ -12,9 +12,7 @@ https://www.synapse.org/#!Synapse:syn15569329/wiki/582412
 
 ### TIMELINE
 
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3343002/0283c7c7-eb13-4c83-80db-4ce9d324ccd6/schedule.jpg?response-content-disposition=attachment%3B%20filename%3Dschedule.jpg&response-content-type=image%2Fjpeg&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDHSyRFwdOPqjTCgyXCK3AxuFCKgl9xIF%2BtyawBe1lTnJXmzmZiKC3%2BM6i7a%2Bczpi9K4YuH0NxKaaOndhGdknHiNToEaSX16SJGzC%2B3OGHqvAGg6DY%2Fr3lUUdmqbD1dqBeROP8C00FwutWLCRSB3l9jRScC4PLb8XcNE6X07lWv4yhPWxQoyHrm447ox6DqiWFANxTGFfxKfVlDs%2FttCB%2BDzB37RWqvONg0yeY8qTpNNco2YKr4XIjLlqN0U5RPIFPDd6uBrOEAu69uEtUVGDmtf%2BpAaTYapmAWN4t0j3u0LTmox6t2l3D%2BAMCWU0cGrkAh4AAvzDnX%2FgNDMMs1oA7CpxE4foOp4%2FGnBAteAcjVxrrYUiUnDBfv66ptFwQUT50%2BVjB1X3dPHSDVLD43TP46TiiXLJeuSbreL%2BqAob1%2FBumUfYWwVi1jjky0WrJDT%2FDOOtkgikqEJaityV6CXcqgfTUS9sgwWpE9N08Ha2BHeOITV%2FreoVz%2B9LsvYm4iV3lD4vPWnoOPU5pWi1iJpGI1KbnbVey8Z%2FXYxSwlEDwlI62%2BKBxv9eHKMggt4KmGLKj%2BAdrepM5vdDUhAcPc%2F%2F90bXCJVl3VYo3Zre3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064601Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGX66JI5B62%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=aa5a8b4a5a0a6e4d4cc2ca3746bc065999384ecdb797e0fdf31356c23b066ded)
-
-
+### ![schedule](/Users/donghoon/GitHub/TIL_AI/공모전/image/schedule.jpg)
 
 ### REGISTER
 
@@ -22,33 +20,25 @@ https://www.synapse.org/#!Synapse:syn15569329/wiki/582412
 
 ### CHALLENGE ORGANIZERS
 
-
-
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3377421/99f1c9d1-a46a-40b3-b4cc-da545c4a5032/20181031_172725.png?response-content-disposition=attachment%3B%20filename%3D20181031_172725.png&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDDT2XPcUBBUZcjAooiK3A2NVSs0VZ%2F3BnWdmf4Y9V6r5HbbFgqR0hKNvInFd9yKxQ%2B34DXoyuK9PNUA53HQySpGHL4UzzJ1McE59xEHWC8YLJIF5VMxfrU0sUEWp97J8Wf5uFyffzNbAwfBHvQhUKabqhEIYG2roctsM0RJRlKydzJys9D7iBTgIjU6WOo2kcGzO0owSlBXJmOKXnKVgWwemR0PFMPOyKYtt7L5oX07Kk9gr3zHi7ailxW3%2Buq8GPzcEocYXhZi0akKu2BYUCUof47tDilkdCwf9E2j9JSTAKDgBkJQcX5TC%2FnW0Up%2BAqFD6THGg4BHVPfMR9NywowALaaufeaAKu%2FJ2ZDfAQTeur6UOflFcC2gPoiTTYSuL8yhaT7uqPMGe1wNsk7cfDqXuWP%2B5ZQgVcdwZFuFtT4Lvnqg9zZVKGmaOF445dye%2B9WzieAHapxV0vgqRfrXmSSep4AYT1GlU1tVdu3Q4SZav50n%2F9IoYtKT8bssu3OEW71qrVrvBAh5qNgG8n4pT%2BiP2tpco47Lpn4SBtzu%2BUjYiZ8ICsnQPthsiPns6Si5ZMrApj0lm8gRZN3VH4ssVSpghaBr2Figo36He3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064601Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGX4QHUSLN6%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=8086943606beead1416de6589e10ab299044073891b99e8f96885ea31628ff5f)
+![20181031_172725](/Users/donghoon/GitHub/TIL_AI/공모전/image/20181031_172725.png)
 
 
 
 ### DATA CONTRIBUTORS & ENGINEERING ADVISORS
 
-
-
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3377421/a8b87cfd-66d2-4cce-8892-362ba1a6709c/20181101_110807.png?response-content-disposition=attachment%3B%20filename%3D20181101_110807.png&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDI0ggtPVnrLZMOL1YiK3A3TtpWIIGcdhCeaHVF%2FlAonioOFgl0YW9JiBmy5IIAf5IGzp1ugJdzUdb9UbkMOk3I1b8Ym5CP61l920pJRkDfaheKe8n7XXko5PHQ%2BLbVXS62DUm3imaPQIph8SGg8zFOEbBBRHzugOJtdWt4B0%2B0JuN7ohim9OoupWYsNeFAkYXf9lbepWneMyyJasnHC%2BbrX4zpamvESW9%2Bk6efga0%2Fe0%2FkGAE2RGNMy6AIVu8PfkV78nT%2FZRmwJZvCk2S6GxFLfChJoy4ko1RSJSLjDpEtGByhwo3xk017hoQf8kh%2FCXM1QrXvZ8QwYIzsn%2B71gLQaPX2hKtbk7KUqN7p4Fw665HJworoWZ%2BmNPMBw6kONs1hFUpEiD7gzkjrYmo6LrZRgqw7yvCGxIsQX5PSD93dxYjYcm7jRJjLs7%2BHbktEQRlpF3ASFv1qZD6TnaGpuhp3Pw6NS3z4a9EQ04GOLpWsd4cVK8DsEGOdXTdYpr8n%2Bl49r4DSDPVVkpaVY5HBWKzO2L%2BkL6jDZsc%2F6AstYYOINUNmSml%2FtAa2mHbVwCCI2rR3aj9rYK%2B%2FBszpeBE%2BmEjneQLxSEdzpEo2JPe3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064602Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGXRYDLX5AZ%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=bf21a9dc6cd92383c9829dbb575f643b77635db6bf0fe2b836cf44a646ee0626)
-
-
+![20181101_110807](/Users/donghoon/GitHub/TIL_AI/공모전/image/20181101_110807.png)
 
 ### FUNDERS
 
+![f](/Users/donghoon/GitHub/TIL_AI/공모전/image/f.png)
 
 
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3377421/6b8ec789-8b46-42c8-a585-fa9a83d205e7/f.png?response-content-disposition=attachment%3B%20filename%3Df.png&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDBmF2bbaWDXExQHSWyK3A5UPeCd%2FqkBjBELHdWWYU6RNBvBkGhWOxJM7VKYcBn20CXihAsvnO5whQZqFzCUvnaiCxhnTlk0sG3H2hd5STbCBMpxxg%2BAygnKZBAgOSv1PYXpHMz1j1tiLwsSnychZotJR%2Fz9aAvTFmvWeC2wg4lzv4Bb3r%2F55FuC2BCzoOvSpaIWXvNRCm7iub3VTNABKxFYbNGc75dnGFYPDzsRslBxdjE%2F65FFeKgqixrP1mQ%2B6SzVAnMfp0quOS3%2BjZntIUqpc1tBUkKM7oZf6aek9CGCMUkgRA3dZ7FL%2Bzjk7Ee0f458ImNbP3hfF2NutsgBBs5TSktoTO5SnN2pBvPqbf5h5hyvMZJmPNPUyDMZsasHesZGe4DtBdzeZFRRl8bqiyD1bv1E%2FMVxHO11R99%2FPfr78jHuUl92tl5ho%2B%2Fa2rnTDg5lMfn4XbyEUG%2Ba705P%2FYnK2SRGMAaciAcAnrBBWIdaLimoXudPQ00pWLZHJP46LAnxiuGWWiAdaP%2BUCiqVem03nloSaOfI1WAYvfJbrtSsD6JZGWrAmxUGvM1Pwfd32TdaF0m3bhqdashBbCu8M6Lb3dKxTvIQolZje3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064602Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGXVPCLFZ5T%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=0bf43dccec6e719572d81f13ac9c43a66fc08c04bd52177b2842e1821aabe9ce)
 
 
 
 ### CLOUD COMPUTING SPONSORS
 
-
-
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3377421/e179d542-c533-4d52-bcba-11ed3472b28e/kakao.png?response-content-disposition=attachment%3B%20filename%3Dkakao.png&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDFYHY7vQgv2ZwfhvRSK3A%2FVXjoIbbY0iPGBlxyeluOofx9VzD9VhIjQbFOsKi%2F6MNkXQisEYVhfpoO050nt3lY%2FSev7QCDJEzx4s%2BfgNvsCCulKcmILErWzQyEes%2F4TPNZ1Wkpf1lq0Ozlc3ydPcxT4AsPKs6bW%2FN%2BBaWFQLPYOgrqO6IFhehztE%2BPqcpRYlIRIbHTbJkPBgFQC6Rmvvb6%2BCPWbKgH04dDfurF%2FcjfgNB9ytUcptcbILMWDKGqT%2Fjr8JO1S4HlqFr6kTx3DsPrULrSbouaGt8%2F5YS8B5F2khNL9gHnJqGc0AIcMcpR2ntk5AGgbZa9Sn%2BTfCL1XctbjdeEwEbdum0hzrwjz0yQO6yqXJY7JD8eRrfxyAN5AHzkXqFtTf6tu964r1Fgayqwsj6b%2F792jx8Oh0yEF%2BqDPegh8URWuKVeGy4TjVApGWxz0Cq9alWnJEVKDP3xgGOOg8Rn7MwygnZ6wCR2dlrbZRIQWbwafao95vBUCoU%2Bz4oSpvUgbLHjVb6TF%2FspauSffL4zSg32OrfBu9bSTtwJ%2BHq57kplmWPpoC205lW0JRsc6k0UJBxmZaJib9a2aajN%2BUrRfPrk4o0Kne3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064602Z&X-Amz-SignedHeaders=host&X-Amz-Expires=29&X-Amz-Credential=ASIAUXTJYTGX7WF45EU5%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=3c54a58da877e140266558954bb6085d923c988aaff680dd64c38cc865202d4f)
+![kakao](/Users/donghoon/GitHub/TIL_AI/공모전/image/kakao.png)
 
 
 
@@ -56,9 +46,7 @@ https://www.synapse.org/#!Synapse:syn15569329/wiki/582412
 
 
 
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3377421/0b20bf88-b3f7-42d5-93ae-61856109a4bd/s3.png?response-content-disposition=attachment%3B%20filename%3Ds3.png&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDDT2XPcUBBUZcjAooiK3A2NVSs0VZ%2F3BnWdmf4Y9V6r5HbbFgqR0hKNvInFd9yKxQ%2B34DXoyuK9PNUA53HQySpGHL4UzzJ1McE59xEHWC8YLJIF5VMxfrU0sUEWp97J8Wf5uFyffzNbAwfBHvQhUKabqhEIYG2roctsM0RJRlKydzJys9D7iBTgIjU6WOo2kcGzO0owSlBXJmOKXnKVgWwemR0PFMPOyKYtt7L5oX07Kk9gr3zHi7ailxW3%2Buq8GPzcEocYXhZi0akKu2BYUCUof47tDilkdCwf9E2j9JSTAKDgBkJQcX5TC%2FnW0Up%2BAqFD6THGg4BHVPfMR9NywowALaaufeaAKu%2FJ2ZDfAQTeur6UOflFcC2gPoiTTYSuL8yhaT7uqPMGe1wNsk7cfDqXuWP%2B5ZQgVcdwZFuFtT4Lvnqg9zZVKGmaOF445dye%2B9WzieAHapxV0vgqRfrXmSSep4AYT1GlU1tVdu3Q4SZav50n%2F9IoYtKT8bssu3OEW71qrVrvBAh5qNgG8n4pT%2BiP2tpco47Lpn4SBtzu%2BUjYiZ8ICsnQPthsiPns6Si5ZMrApj0lm8gRZN3VH4ssVSpghaBr2Figo36He3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064602Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGX4QHUSLN6%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=381a31c39bab949966fda5f5c3d0a9277799333c79e88a8d83a396ded451130f)
-
-
+![s3](/Users/donghoon/GitHub/TIL_AI/공모전/image/s3.png)
 
 
 
@@ -88,7 +76,7 @@ https://www.synapse.org/#!Synapse:syn15569329/wiki/582412
 
   LVM (red), APM (green), PPM (blue)
 
-  ![img](https://s3.amazonaws.com/proddata.sagebase.org/3373933/156a56c5-b247-4de6-bbb2-05667d14794a/Test%202.PNG?response-content-disposition=attachment%3B%20filename%3DTest%202.PNG&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDBUcJTrw0dzhzhd9jCK3A3vMbxrRLN4w3iCcimpgx7QmIpITZLDpSAmepH%2BvY1ayEwwEfSiQ6UD8M61hx6v4UHkNepKPvHGG2LPyHvtsXzGviFxd%2BXgVyTTwa6BdNCwnty4iiXmPru7CgJlCbZXdn5xXCQ9YcYNA8Yz6n5ebtWBLB95l4jWevJFQjXbI%2FKKb2vuDxvq2lCjT0ZugqW8wSByhg1IJJIFzbFr8s%2BDyMAboYhbvV%2BQW1elnZNTjJ01YSKPuQQcIpUI%2FnAo5%2Bvw5g%2F%2BfkTjSsmWg2k6XNetG1xQIw8ry46NAMLkvJV1VDGZfaBzIEFCWatHJKReP9X36vIG4TW3swStsc0f5gWV1TPNwOaSvCTcc9frH4U%2B5iCPgcd%2BbqewOQiZBtxRlkx%2B5yfV84%2Bv7XX8vA73yNfeLa9GaXTNLcLRM4cVhPxhAwmwisn87forc2ooiHj5esogudSsqeTIO9yfBqKyYXspMy7okNnYcBotvMdC2zKjB6E4AQEQ7REAow9HA89pgkRVjqi4BKEu%2Fy2npUWJZ1XrxBd848XKBTplT9U0tK83KJa42JdXo8v0Q192ZHuEJRS49mxknUvb6WyQooa3e3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064756Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGXUPELZKGG%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=8dc73c734f9efa1ff42f61fbed229edd2b1bb24980505aa7a4d59eeed604e56f)
+  ![Test](/Users/donghoon/GitHub/TIL_AI/공모전/image/Test.PNG)
 
   **사진 설명** : (위) 선천성 심장병 환자의 심장 CT에 대한 심장의 주석 , (아래) 비대증 성 심근 병증 환자에서 심장 CT의 심장에 대한 주석
 
@@ -98,7 +86,7 @@ https://www.synapse.org/#!Synapse:syn15569329/wiki/582412
 
 - 이 Contest의 독특한 도전 과제는 '변형된' 또는 '비정형적인' 심장 구조가 있는 많은 사례가 있다는 것입니다. - A unique challenge in this contest is we have many cases with 'deformed' or 'atypical' cardiac structures.
 
-  ![img](https://s3.amazonaws.com/proddata.sagebase.org/3373933/8df486ad-79e9-4ae2-9911-905aa17a66c3/atypical%20cardiac.PNG?response-content-disposition=attachment%3B%20filename%3Datypical%20cardiac.PNG&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDBmF2bbaWDXExQHSWyK3A5UPeCd%2FqkBjBELHdWWYU6RNBvBkGhWOxJM7VKYcBn20CXihAsvnO5whQZqFzCUvnaiCxhnTlk0sG3H2hd5STbCBMpxxg%2BAygnKZBAgOSv1PYXpHMz1j1tiLwsSnychZotJR%2Fz9aAvTFmvWeC2wg4lzv4Bb3r%2F55FuC2BCzoOvSpaIWXvNRCm7iub3VTNABKxFYbNGc75dnGFYPDzsRslBxdjE%2F65FFeKgqixrP1mQ%2B6SzVAnMfp0quOS3%2BjZntIUqpc1tBUkKM7oZf6aek9CGCMUkgRA3dZ7FL%2Bzjk7Ee0f458ImNbP3hfF2NutsgBBs5TSktoTO5SnN2pBvPqbf5h5hyvMZJmPNPUyDMZsasHesZGe4DtBdzeZFRRl8bqiyD1bv1E%2FMVxHO11R99%2FPfr78jHuUl92tl5ho%2B%2Fa2rnTDg5lMfn4XbyEUG%2Ba705P%2FYnK2SRGMAaciAcAnrBBWIdaLimoXudPQ00pWLZHJP46LAnxiuGWWiAdaP%2BUCiqVem03nloSaOfI1WAYvfJbrtSsD6JZGWrAmxUGvM1Pwfd32TdaF0m3bhqdashBbCu8M6Lb3dKxTvIQolZje3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064756Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGXVPCLFZ5T%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=1225c02f45f57038f838b1ebc4799a5dd35ebaaecf2cd1eff2da5e894b347579)
+  ![atypical cardiac](/Users/donghoon/GitHub/TIL_AI/공모전/image/atypical cardiac.png)
 
   **사진 설명** : 심장 구조의 비순환 형태학
 
@@ -112,7 +100,7 @@ https://www.synapse.org/#!Synapse:syn15569329/wiki/582412
 
 - 전반적인 성능 점수 , - Overall performance score,
 
-  ![img](https://s3.amazonaws.com/proddata.sagebase.org/3373933/85d85396-d5c8-491d-aeb1-755fa56204ee/score1.PNG?response-content-disposition=attachment%3B%20filename%3Dscore1.PNG&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDHSyRFwdOPqjTCgyXCK3AxuFCKgl9xIF%2BtyawBe1lTnJXmzmZiKC3%2BM6i7a%2Bczpi9K4YuH0NxKaaOndhGdknHiNToEaSX16SJGzC%2B3OGHqvAGg6DY%2Fr3lUUdmqbD1dqBeROP8C00FwutWLCRSB3l9jRScC4PLb8XcNE6X07lWv4yhPWxQoyHrm447ox6DqiWFANxTGFfxKfVlDs%2FttCB%2BDzB37RWqvONg0yeY8qTpNNco2YKr4XIjLlqN0U5RPIFPDd6uBrOEAu69uEtUVGDmtf%2BpAaTYapmAWN4t0j3u0LTmox6t2l3D%2BAMCWU0cGrkAh4AAvzDnX%2FgNDMMs1oA7CpxE4foOp4%2FGnBAteAcjVxrrYUiUnDBfv66ptFwQUT50%2BVjB1X3dPHSDVLD43TP46TiiXLJeuSbreL%2BqAob1%2FBumUfYWwVi1jjky0WrJDT%2FDOOtkgikqEJaityV6CXcqgfTUS9sgwWpE9N08Ha2BHeOITV%2FreoVz%2B9LsvYm4iV3lD4vPWnoOPU5pWi1iJpGI1KbnbVey8Z%2FXYxSwlEDwlI62%2BKBxv9eHKMggt4KmGLKj%2BAdrepM5vdDUhAcPc%2F%2F90bXCJVl3VYo3Zre3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064756Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGX66JI5B62%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=cfe8d0e0cd43ab4c0af6dd601c8decf4fa47607ee2c2365b1a08c2bd0e0a95a1)
+  ![score1](/Users/donghoon/GitHub/TIL_AI/공모전/image/score1.png)
 
 
 
@@ -129,7 +117,7 @@ https://www.synapse.org/#!Synapse:syn15569329/wiki/582412
 Cardiac computed tomography (CT) is a widely used method for the diagnosis of various heart diseases. In the early days, cardiac CT was mainly used to diagnose coronary artery disease. Recently use of cardiac CT for diagnosing structural heart disease (e.g., valvular disease, congenital heart disease, and cardiomyopathy) is increasing. The most basic step in diagnosing cardiac CT is to determine whether there is a gross abnormality. For example, the size of the left ventricle seems larger or looks smaller. However, this eyeball estimation has the risk of being inaccurate and the wide interobserver variability. Quantitative analysis of heart structures, for example, the volume of the left ventricle is 100 ml, can provide more accurate information than the eyeball estimation. This quantitative analysis of cardiac CT is now widely used in clinical practice and research. One of the essential techniques for the quantitative analysis is the segmentation of each cardiac structure (e.g., right or left ventricular chamber, ventricular muscle, and papillary muscle).
  
 
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3373933/14c05250-9f13-4bb7-a588-541d9d4bd1d0/ventricle%20volume.PNG?response-content-disposition=attachment%3B%20filename%3Dventricle%20volume.PNG&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDFYHY7vQgv2ZwfhvRSK3A%2FVXjoIbbY0iPGBlxyeluOofx9VzD9VhIjQbFOsKi%2F6MNkXQisEYVhfpoO050nt3lY%2FSev7QCDJEzx4s%2BfgNvsCCulKcmILErWzQyEes%2F4TPNZ1Wkpf1lq0Ozlc3ydPcxT4AsPKs6bW%2FN%2BBaWFQLPYOgrqO6IFhehztE%2BPqcpRYlIRIbHTbJkPBgFQC6Rmvvb6%2BCPWbKgH04dDfurF%2FcjfgNB9ytUcptcbILMWDKGqT%2Fjr8JO1S4HlqFr6kTx3DsPrULrSbouaGt8%2F5YS8B5F2khNL9gHnJqGc0AIcMcpR2ntk5AGgbZa9Sn%2BTfCL1XctbjdeEwEbdum0hzrwjz0yQO6yqXJY7JD8eRrfxyAN5AHzkXqFtTf6tu964r1Fgayqwsj6b%2F792jx8Oh0yEF%2BqDPegh8URWuKVeGy4TjVApGWxz0Cq9alWnJEVKDP3xgGOOg8Rn7MwygnZ6wCR2dlrbZRIQWbwafao95vBUCoU%2Bz4oSpvUgbLHjVb6TF%2FspauSffL4zSg32OrfBu9bSTtwJ%2BHq57kplmWPpoC205lW0JRsc6k0UJBxmZaJib9a2aajN%2BUrRfPrk4o0Kne3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064836Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGX7WF45EU5%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=89b9e3b0f38bfea3c21aec571bfb36ab48be547bb8dfe470c3271a0d396aeb6a)
+![ventricle volume](/Users/donghoon/GitHub/TIL_AI/공모전/image/ventricle volume.PNG)
 
 **사진 설명** : 심실의 volume은 큰 예후적 의미를 갖는다.
 
@@ -161,9 +149,9 @@ Participants will perform segmentation tasks on two types of cardaic CT data set
 - The first is the congenital heart disease (CHD) CT data set. In the CHD data set, right ventricular chamber (RV), left ventricular chamber (LV), and left ventricular myocardium (LVM) should be segmented.
 - The second is hypertrophic cardiomyopathy CT dataset. This dataset also contains some normal controls. In the HCMP dataset, the left ventricular myocardium (LVM), anterior papillary muscle (APM), and posterior papillary muscle (PPM) should be segmented (**Task 2**).
 
+![Test](/Users/donghoon/GitHub/TIL_AI/공모전/image/Test.PNG)
 
 
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3373933/3d4adf81-908f-40ed-bea9-ac3cbd42470b/Test.PNG?response-content-disposition=attachment%3B%20filename%3DTest.PNG&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDDT2XPcUBBUZcjAooiK3A2NVSs0VZ%2F3BnWdmf4Y9V6r5HbbFgqR0hKNvInFd9yKxQ%2B34DXoyuK9PNUA53HQySpGHL4UzzJ1McE59xEHWC8YLJIF5VMxfrU0sUEWp97J8Wf5uFyffzNbAwfBHvQhUKabqhEIYG2roctsM0RJRlKydzJys9D7iBTgIjU6WOo2kcGzO0owSlBXJmOKXnKVgWwemR0PFMPOyKYtt7L5oX07Kk9gr3zHi7ailxW3%2Buq8GPzcEocYXhZi0akKu2BYUCUof47tDilkdCwf9E2j9JSTAKDgBkJQcX5TC%2FnW0Up%2BAqFD6THGg4BHVPfMR9NywowALaaufeaAKu%2FJ2ZDfAQTeur6UOflFcC2gPoiTTYSuL8yhaT7uqPMGe1wNsk7cfDqXuWP%2B5ZQgVcdwZFuFtT4Lvnqg9zZVKGmaOF445dye%2B9WzieAHapxV0vgqRfrXmSSep4AYT1GlU1tVdu3Q4SZav50n%2F9IoYtKT8bssu3OEW71qrVrvBAh5qNgG8n4pT%2BiP2tpco47Lpn4SBtzu%2BUjYiZ8ICsnQPthsiPns6Si5ZMrApj0lm8gRZN3VH4ssVSpghaBr2Figo36He3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064858Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGX4QHUSLN6%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=f3b51a50ef76874d83b8c7eaa7945b6d050df5b2a470a126285886deb5ad86a0)
 
 
 
@@ -214,5 +202,4 @@ The Dice similarity coefficient (DSC) is used for all performance measures in th
 
 #### Scoring
 
-![img](https://s3.amazonaws.com/proddata.sagebase.org/3373933/31a648fa-07a4-4c05-8362-aaa8e325b2a3/score.PNG?response-content-disposition=attachment%3B%20filename%3Dscore.PNG&response-content-type=image%2Fpng&X-Amz-Security-Token=FQoGZXIvYXdzEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDBUcJTrw0dzhzhd9jCK3A3vMbxrRLN4w3iCcimpgx7QmIpITZLDpSAmepH%2BvY1ayEwwEfSiQ6UD8M61hx6v4UHkNepKPvHGG2LPyHvtsXzGviFxd%2BXgVyTTwa6BdNCwnty4iiXmPru7CgJlCbZXdn5xXCQ9YcYNA8Yz6n5ebtWBLB95l4jWevJFQjXbI%2FKKb2vuDxvq2lCjT0ZugqW8wSByhg1IJJIFzbFr8s%2BDyMAboYhbvV%2BQW1elnZNTjJ01YSKPuQQcIpUI%2FnAo5%2Bvw5g%2F%2BfkTjSsmWg2k6XNetG1xQIw8ry46NAMLkvJV1VDGZfaBzIEFCWatHJKReP9X36vIG4TW3swStsc0f5gWV1TPNwOaSvCTcc9frH4U%2B5iCPgcd%2BbqewOQiZBtxRlkx%2B5yfV84%2Bv7XX8vA73yNfeLa9GaXTNLcLRM4cVhPxhAwmwisn87forc2ooiHj5esogudSsqeTIO9yfBqKyYXspMy7okNnYcBotvMdC2zKjB6E4AQEQ7REAow9HA89pgkRVjqi4BKEu%2Fy2npUWJZ1XrxBd848XKBTplT9U0tK83KJa42JdXo8v0Q192ZHuEJRS49mxknUvb6WyQooa3e3wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20181123T064931Z&X-Amz-SignedHeaders=host&X-Amz-Expires=30&X-Amz-Credential=ASIAUXTJYTGXUPELZKGG%2F20181123%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=70040292bd4a735152c6a23dc520cb9386c6ac6467074becbd2ed64e572da7a7)
-
+![score](/Users/donghoon/GitHub/TIL_AI/공모전/image/score.PNG)
