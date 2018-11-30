@@ -2,6 +2,7 @@
 
 U-net : [https://arxiv.org/abs/1505.04597](https://arxiv.org/abs/1505.04597?fbclid=IwAR1dMlEhC9k1OheWee0w3sa6ydyscc1qhoLS1ZtBhDZmqbN_Lzem6iVaUh8)
 3D U-net : [https://arxiv.org/abs/1606.06650](https://arxiv.org/abs/1606.06650?fbclid=IwAR39bbdnIFey7PLowIQyOW4B5bj6c3Pv8EmYPvO96O8xWtUxqnZHyEXxjrM)
+3D U-Net 정리 사이트 : http://cdm98.tistory.com/35?fbclid=IwAR3JygSmQiK-Kzk6_cq0xICZxleyGPoSRvukgaPUJsOTxZ0_eLt_QcmVoiM
 
 사실 어떤 모델이 가장 적절할지는 데이터에 따라 다르다고 들어서 확정을 내리는건 힘듬
 biomedical 쪽에서 주로 쓰이는 모델은 대부분 U-net 계열의 Encoder-encoder 형태
@@ -29,6 +30,9 @@ Mask R-CNN이나 DeepLab과 같은 모델도 좋은 성능을 보이기도 함
 밑바닥부터 시작하는 의료 AI 관련 영상
 
 [https://youtu.be/EM1uBl5T09c](https://youtu.be/EM1uBl5T09c?fbclid=IwAR2vXKV249HacfRuyacT3EnuhM8I0oEuViAeL2leatoJJEUtmDUbn2Ns4YQ)
+**질문사항:
+
+- Patch samling 과정에서 center cropping 대신에 resize를 쓰는 이유는 무엇인가요? Resize대신 cropping을 쓰면 정보의 왜곡을 방지할 수 있을 것 같아서 궁금증이 들었습니다!
 
 Full Preprocessing Tutorial | Kaggle 
 
