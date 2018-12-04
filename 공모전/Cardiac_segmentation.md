@@ -115,7 +115,7 @@ https://www.synapse.org/#!Synapse:syn15569329/wiki/582412
 **Quantitative CT image analysis and its importance**
 
 Cardiac computed tomography (CT) is a widely used method for the diagnosis of various heart diseases. In the early days, cardiac CT was mainly used to diagnose coronary artery disease. Recently use of cardiac CT for diagnosing structural heart disease (e.g., valvular disease, congenital heart disease, and cardiomyopathy) is increasing. The most basic step in diagnosing cardiac CT is to determine whether there is a gross abnormality. For example, the size of the left ventricle seems larger or looks smaller. However, this eyeball estimation has the risk of being inaccurate and the wide interobserver variability. Quantitative analysis of heart structures, for example, the volume of the left ventricle is 100 ml, can provide more accurate information than the eyeball estimation. This quantitative analysis of cardiac CT is now widely used in clinical practice and research. One of the essential techniques for the quantitative analysis is the segmentation of each cardiac structure (e.g., right or left ventricular chamber, ventricular muscle, and papillary muscle).
- 
+
 
 ![ventricle volume](/Users/donghoon/GitHub/TIL_AI/공모전/image/ventricle volume.PNG)
 
