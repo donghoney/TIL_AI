@@ -44,3 +44,39 @@ Size invariant 에 강한 네트워, curriculum learning, 충분한 데이터, �
    -> 대략적인 Normal과 노듈의 비율을 맞춰 Data Imbalance 방지
 
 3. U-Net도data-science-bowl-2018 1위팀이 사용했을 정도로 좋은 모델이지만 SOTA 중 하나 인 Deep Lab V3 등의 모델도 고려해볼 만하다고 생각합니다.
+
+
+
+### 질문 2.
+
+질문자 : Dong Woo Lee
+
+현재 가장 핫한 image segmentation 알고리즘은 무엇인가요? segmentation 해야할건 binary입니다
+
+답변자 1 : 류경윤
+
+mask r-cnn 아닐까요
+
+답변자 2 : 소준섭
+
+Unet 도 좋습니다
+
+답변자 3 : 김동현
+
+pspnet이 안정적이고 괜찮구요 도전적이신 분이라면 Deeplab v3+ 나 dpc 써보시죠 (튜닝 안되면 오히려 유넷보다 성능안나올수도 있어요) **dpc 링크 : [https://arxiv.org/pdf/1809.04184](https://arxiv.org/pdf/1809.04184?fbclid=IwAR3Px8-TRZEnkOvvyxMuJ0d0b2YorPPjJc5aoZrDDtZbUCdoZPpDCK2tDYE)
+
+0 1 클래스 예측이라도 imbalance 하다면 ohem 같은거 꼭 써주시구요
+
+답변자 4 : 구봉회
+
+[https://github.com/gellston/OpenCodeModule](https://github.com/gellston/OpenCodeModule?fbclid=IwAR22BL6wdyOxdO3JosOYoOxSlscGF5tnPIeL_ySe9pGuaCWwygnejfHFf4w)segmentation 동영상이랑 C 코드 몇개 들어가있습니다 ㅠ [https://github.com/.../model_custom_mobile_segmentation...](https://github.com/gellston/DeepLearningExamples/blob/master/models/model_custom_mobile_segmentation_v3.py%EC%9D%B4%EA%B1%B4?fbclid=IwAR3GLoyn2yusS1m3Y7MkYKPrXQ6anPeu_sS66E1JqaLHTWPOfwO4o5fPa0Y) 파이썬 스크립트로 짜놓은 모델이구요.. 저도 멀티 클래스말고 바이너리 분류를 했습니다. 참고하시면되거같네요 ㅜ (residual block과 dense block 사용한 모델도 들어가있습니다)
+
+
+
+답변자 5 : 박석
+
+[https://modulabs-biomedical.github.io](https://modulabs-biomedical.github.io/?fbclid=IwAR3mii_FUJrC1WcVYbT2nzCFwid06yKQ5WOvOPU1LqywnW76j8YWsJ7fxE4) 모두의연구소 블로그에에 U-Net 도 참고하세요^^
+
+답변자 6 : Joohyun Ryu
+
+ E-Net 계열이 좋습니다. ERF NET이나, ESP NET. SEG UNET도 괜찮습니다.
