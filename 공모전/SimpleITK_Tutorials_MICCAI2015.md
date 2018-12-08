@@ -2,7 +2,7 @@
 
 < [SimpleITK](https://itk.org/Wiki/SimpleITK)
 
-
+본문 링크 : https://itk.org/Wiki/SimpleITK/Tutorials/MICCAI2015
 
 
 
