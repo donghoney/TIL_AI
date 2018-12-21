@@ -1,0 +1,158 @@
+clear all ; close all ; clc ;
+
+load('Whole_Data_Set.mat')
+
+% T#: Threshold sensitivity value, 시신경이 인지 가능한 최소 밝기 숫자가 높을수록 희미한 시표를 볼 수 있음
+% TD#: Total deviation, 동일연령대의 정상 평균과 차이
+% TDP#: TD 값의 확률 분포상에서의 값
+% PD#: Pattern Deviation, 국소적 시야 손상 부위를 하이라이트 해서 보여주는 수치, TD 값중 7번째 높은 값을 모든 시표 위치 값에서 빼줌
+% PDP#: PD 값의 확률 분포항에서의 값
+% MD: Mean Deviation, 동일연령대의 정상 평균과의 차이의 평균값
+% PSD: Pattern Standard Deviation, hill of vision의 불균형한 정도, 표준 편차와 유사
+% N: Normal
+% G: Glaucoma (3개 분류 일때는 primary open angle glaucoma, POAG 임)
+% NTG: Normal tension glaucoma
+
+data_class1_temp = [] ;
+data_class2_temp = [] ;
+
+figure
+hold on
+for index = 1:length(ID)
+    if label_true(index) == 0
+        plot(MD(index,1), PSD(index,1), 'ko')
+        if( isempty(data_class1_temp) )
+            data_class1_temp = [ MD(index,1), PSD(index,1) ] ;
+        else
+            data_class1_temp = [ data_class1_temp ; MD(index,1), PSD(index,1) ] ;
+        end
+    else
+        plot(MD(index,1), PSD(index,1), 'r*')
+        if( isempty(data_class2_temp) )
+            data_class2_temp = [ MD(index,1), PSD(index,1) ] ;
+        else
+            data_class2_temp = [ data_class2_temp ; MD(index,1), PSD(index,1) ] ;
+        end
+    end
+end
+
+
+data_class1 = data_class1_temp( 1:300, : ) ;
+data_class2 = data_class2_temp( 1:300, : ) ;
+
+%% 베이지안 분류기
+MU = [mean(data_class1) ; mean(data_class2) ] ;
+SIG(:,:,1) = cov(data_class1) ;
+SIG(:,:,2) = cov(data_class2) ;
+
+SIGmean = (cov(data_class1) + cov(data_class2)) / 2 ; % case 2: 동일 공분산 평균으로 가정
+
+Dtrain = [data_class1 ; data_class2] ; % 학습데이터 줄
+Etrain = zeros(3,1) ; % 오분류 데이터 개수
+
+data_num  = size(data_class1,1) ;
+class_num = 2 ; % class 개수
+
+%%
+for k = 1:class_num % class now
+    
+    Dtrain_sub = Dtrain((k-1)*data_num+1:k*data_num,:) ;
+    
+    for i = 1:data_num % data now
+        for j = 1:2
+            % case 1: 단위 공분산 가정
+            distance1(j,1) = (Dtrain_sub(i,:) - MU(j,:)) * (Dtrain_sub(i,:) - MU(j,:))' ;
+            % case 2: 동일 공분산 가정 (마할라노비스 거리)
+            distance2(j,1) = (Dtrain_sub(i,:) - MU(j,:)) / SIGmean * (Dtrain_sub(i,:) - MU(j,:))' ;
+            % case 3: 일반적 공분산 가정
+            distance3(j,1) = (Dtrain_sub(i,:) - MU(j,:)) / reshape(SIG(:,:,j),2,2) * (Dtrain_sub(i,:) - MU(j,:))' + log( det( reshape(SIG(:,:,j),2,2) ) ) ;
+        end
+        
+        % case 1
+        [min1v, min1i] = min(distance1) ;  % minimum value(최소거리) 와 minimum index(클래스)
+        self_classify(i,k,1) = min1i ; % 클래스 저장
+        if min1i ~= k               % 오류 판단
+            Etrain(1,1) = Etrain(1,1) + 1 ;
+        end
+        
+        % case 2
+        [min2v, min2i] = min(distance2) ;
+        self_classify(i,k,2) = min2i ;
+        if min2i ~= k
+            Etrain(2,1) = Etrain(2,1) + 1 ;
+        end
+        
+        % case 3
+        [min3v, min3i] = min(distance3) ;
+        self_classify(i,k,3) = min3i ;
+        if min3i ~= k
+            Etrain(3,1) = Etrain(3,1) + 1 ;
+        end
+    end
+end
+
+self_classified = reshape(self_classify, [600 3]) ;
+Error_rate = Etrain / data_num ;
+
+%%
+% 새로 얻은 데이터를 분류 (결정경계 확인) (2 변수, 3 클래스)
+
+[X, Y] = meshgrid([linspace(-40, 10, 100), linspace(0, 20, 100)]) ;
+XY = [X(:), Y(:)] ;
+
+for i = 1:length(XY)
+    for j = 1:2
+        distance1(j,1) = (XY(i,:) - MU(j,:)) * (XY(i,:) - MU(j,:))' ;
+        distance2(j,1) = (XY(i,:) - MU(j,:)) / SIGmean * (XY(i,:) - MU(j,:))' ;
+        distance3(j,1) = (XY(i,:) - MU(j,:)) / reshape(SIG(:,:,j),2,2) * (XY(i,:) - MU(j,:))' + log( det( reshape(SIG(:,:,j),2,2) ) ) ;
+    end
+    
+    [min1v, min1i] = min(distance1) ;
+    data_classify(i,1) = min1i ;
+    [min2v, min2i] = min(distance2) ;
+    data_classify(i,2) = min2i ;
+    [min3v, min3i] = min(distance3) ;
+    data_classify(i,3) = min3i ;
+end
+
+figure ; 
+    hold on ;
+    axis([-40 10 0 20]) ;
+    plot(data_class1(:,1), data_class1(:,2), 'ko') ;
+    plot(data_class2(:,1), data_class2(:,2), 'r*') ;
+    
+    Z = reshape(data_classify(:,1), size(X)) ;
+    contour(X, Y, Z)
+    
+    title('유클리디안 거리에 따른 베이지안 분류 (오분류율 39%)')
+    xlabel('PSD')
+    ylabel('MD')
+    legend('일반인', '녹내장 환자')
+
+figure ; 
+    hold on ;
+    axis([-40 10 0 20]) ;
+    plot(data_class1(:,1), data_class1(:,2), 'ko') ;
+    plot(data_class2(:,1), data_class2(:,2), 'r*') ;
+    
+    Z = reshape(data_classify(:,2), size(X)) ;
+    contour(X, Y, Z)
+    
+    title('마할라노비스 거리에 따른 베이지안 분류 (오분류율 38%)')
+    xlabel('PSD')
+    ylabel('MD')
+    legend('일반인', '녹내장 환자')
+    
+figure ; 
+    hold on ;
+    axis([-40 10 0 20]) ;
+    plot(data_class1(:,1), data_class1(:,2), 'ko') ;
+    plot(data_class2(:,1), data_class2(:,2), 'r*') ;
+    
+    Z = reshape(data_classify(:,3), size(X)) ;
+    contour(X, Y, Z)
+
+    title('일반적인 베이지안 분류 (오분류율 38%)')
+    xlabel('PSD')
+    ylabel('MD')
+    legend('일반인', '녹내장 환자')

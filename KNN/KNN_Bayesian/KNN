@@ -1,0 +1,127 @@
+clear all ; close all ; clc ;
+
+load('Whole_Data_Set.mat')
+
+% T#: Threshold sensitivity value, 시신경이 인지 가능한 최소 밝기 숫자가 높을수록 희미한 시표를 볼 수 있음
+% TD#: Total deviation, 동일연령대의 정상 평균과 차이
+% TDP#: TD 값의 확률 분포상에서의 값
+% PD#: Pattern Deviation, 국소적 시야 손상 부위를 하이라이트 해서 보여주는 수치, TD 값중 7번째 높은 값을 모든 시표 위치 값에서 빼줌
+% PDP#: PD 값의 확률 분포항에서의 값
+% MD: Mean Deviation, 동일연령대의 정상 평균과의 차이의 평균값
+% PSD: Pattern Standard Deviation, hill of vision의 불균형한 정도, 표준 편차와 유사
+% N: Normal
+% G: Glaucoma (3개 분류 일때는 primary open angle glaucoma, POAG 임)
+% NTG: Normal tension glaucoma
+
+data_class1_temp = [] ;
+data_class2_temp = [] ;
+
+figure
+hold on
+for index = 1:length(ID)
+    if label_true(index) == 0
+        plot(MD(index,1), PSD(index,1), 'ko')
+        if( isempty(data_class1_temp) )
+            data_class1_temp = [ MD(index,1), PSD(index,1) ] ;
+        else
+            data_class1_temp = [ data_class1_temp ; MD(index,1), PSD(index,1) ] ;
+        end
+    else
+        plot(MD(index,1), PSD(index,1), 'r*')
+        if( isempty(data_class2_temp) )
+            data_class2_temp = [ MD(index,1), PSD(index,1) ] ;
+        else
+            data_class2_temp = [ data_class2_temp ; MD(index,1), PSD(index,1) ] ;
+        end
+    end
+end
+
+
+data_class1 = data_class1_temp( 1:300, : ) ;
+data_class2 = data_class2_temp( 1:300, : ) ;
+
+%% K-근접이웃 분류기
+
+data_set = [ data_class1 ; data_class2 ] ;
+Etrain = 0 ;
+N = size(data_set, 1) ;
+K = 100 ;
+
+for i = 1:N
+    data_set_now = data_set(i,:) ;
+    
+    for j = 1:N
+        distance(j,1) = norm(data_set_now - data_set(j,:)) ;
+    end
+    
+    [sorted_array, sorted_index] = sort(distance) ;
+    
+    class_num = zeros(2, 1) ;
+    
+    for j = 1:K % 가장 가까운 거리 순으로 K개
+        % class 1 카운트
+        if sorted_index(j) <= 200
+            class_num(1) = class_num(1) + 1 ;
+        % class 2 카운트
+        else
+            class_num(2) = class_num(2) + 1 ;
+        end
+    end
+    
+    [max_value, max_index] = max(class_num) ; % 가장 많은 클래스는?
+    
+    self_classify(i,1) = max_index ;
+    
+    if self_classify(i,1) ~= ( floor((i-1)/100 + 1) )
+        Etrain(1,1) = Etrain(1,1) + 1 ;
+    end
+end
+
+Error_rate = Etrain/N ;
+1-Error_rate
+
+%%
+% 새로 얻은 데이터를 분류 (결정경계 확인) (2 변수, 3 클래스)
+
+[X, Y] = meshgrid([linspace(-40, 10, 100), linspace(0, 20, 100)]) ;
+XY = [X(:), Y(:)] ;
+
+for i = 1:size(XY,1)
+    XY_now = XY(i,:) ;
+    
+    for j = 1:size(data_set,1)
+        distance_XY(j,1) = norm(XY_now - data_set(j,:)) ; 
+    end
+    
+    [sorted_array, sorted_index] = sort(distance_XY) ;
+    
+    class_num = zeros(2, 1) ;
+    
+    for j = 1:K % 가장 가까운 거리 순으로 K개
+        % class 1 카운트
+        if sorted_index(j) <= 200
+            class_num(1) = class_num(1) + 1 ;
+        % class 2 카운트
+        else
+            class_num(2) = class_num(2) + 1 ;
+        end
+    end
+    
+    [max_value, max_index] = max(class_num) ; % 가장 많은 클래스는?
+    
+    data_classify(i,1) = max_index ;
+end
+
+figure
+    hold on ;
+    axis([-40 10 0 20]) ;
+    plot(data_class1(:,1), data_class1(:,2), 'ko') ;
+    plot(data_class2(:,1), data_class2(:,2), 'r*') ;
+    
+    Z = reshape(data_classify, size(X)) ;
+    contour(X, Y, Z)
+    
+    title('K-근접이웃 분류 (오분류율 15%)')
+    xlabel('PSD')
+    ylabel('MD')
+    legend('일반인', '녹내장 환자')
