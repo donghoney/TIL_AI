@@ -1,11 +1,5 @@
 # Understanding Batch Normalization with Examples in Numpy and Tensorflow with Interactive Code
 
-[![Go to the profile of Jae Duk Seo](https://cdn-images-1.medium.com/fit/c/100/100/0*LxeFHiTjRmxNK5vQ.jpg)](https://towardsdatascience.com/@SeoJaeDuk?source=post_header_lockup)
-
-![img](https://cdn-images-1.medium.com/max/1600/1*XDDcoYNNTTvVJqnb-YrnnQ.gif)
-
-Gif from [here](https://imgur.com/gallery/j6JLpVA)
-
 So for today, I am going to explore batch normalization ([*Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift*](https://arxiv.org/abs/1502.03167) *by* [*Sergey Ioffe*](https://arxiv.org/find/cs/1/au:+Ioffe_S/0/1/0/all/0/1)*, and* [*Christian Szegedy*](https://arxiv.org/find/cs/1/au:+Szegedy_C/0/1/0/all/0/1)). However, to strengthen my understanding for data preprocessing, I will cover 3 cases,
 
 **Case 1** — [Normalization](http://www.dataminingblog.com/standardization-vs-normalization/): Whole Data (Numpy)
