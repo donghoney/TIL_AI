@@ -2,12 +2,6 @@
 
 [![Go to the profile of Jae Duk Seo](https://cdn-images-1.medium.com/fit/c/100/100/0*LxeFHiTjRmxNK5vQ.jpg)](https://towardsdatascience.com/@SeoJaeDuk?source=post_header_lockup)
 
-[Jae Duk Seo](https://towardsdatascience.com/@SeoJaeDuk?source=post_header_lockup)Follow
-
-Mar 27
-
-
-
 ![img](https://cdn-images-1.medium.com/max/1600/1*XDDcoYNNTTvVJqnb-YrnnQ.gif)
 
 Gif from [here](https://imgur.com/gallery/j6JLpVA)
