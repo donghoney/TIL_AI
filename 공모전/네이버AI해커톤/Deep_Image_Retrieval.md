@@ -54,31 +54,20 @@
 
 - Conv 레이어는 (W×H×KW×H×K) 크기가 된다. 모두 Relu Activator 를 사용한다고 가정한다.
 
-- W×HW×H
+- W×H를 새로운 변수인 X로 표현해보자.
+  $$
+  X=\left\{Xi\right\},\ i=\left\{1,…,K\right\}
+  $$
 
-   
+  - 따라서 Xi 는 2D Tensor를 나타내게 된다.
 
-  를 새로운 변수인
+- 추가로 Conv의 position 정보를 pp 하고 하자. 이 때 Xi(p) 는 position p 에 해당하는 2차원 Tensor를 의미하게 된다.
 
-   
+- 새로운 feature vector f 를 정의한다.
+  $$
+  f_Ω=[f_Ω,1...f_{Ω,i}...f_{Ω,K}]^T,with\ f_{Ω,i}=max_{p∈Ω}Xi(p) \qquad (1)
+  $$
 
-  XX
-
-   
-
-  로 표현해보자.
-
-   
-
-  X={Xi},i={1,…,K}X={Xi},i={1,…,K}
-
-  - 따라서 XiXi 는 2D Tensor를 나타내게 된다.
-
-- 추가로 Conv의 position 정보를 pp 하고 하자. 이 때 Xi(p)Xi(p) 는 position pp 에 해당하는 2차원 Tensor를 의미하게 된다.
-
-- 새로운 feature vector ff 를 정의한다.
-
-fΩ=[fΩ,1...fΩ,i...fΩ,K]T,withfΩ,i=maxp∈ΩXi(p)(1)fΩ=[fΩ,1...fΩ,i...fΩ,K]T,withfΩ,i=maxp∈ΩXi(p)(1)
 
 - 결국 `K` 크기를 가지는 1차원 벡터가 된다.
 - 가장 중요한 단점은 모든 지역(localization) 정보가 사라진다.
@@ -96,13 +85,15 @@ fΩ=[fΩ,1...fΩ,i...fΩ,K]T,withfΩ,i=maxp∈ΩXi(p)(1)fΩ=[fΩ,1...fΩ,i...fΩ
 - Region feature vector
   - 앞서 이미지를 나타내는 feature vector fΩfΩ 를 살펴보았다.
   - 이것을 어떤 특정 사각형 Region에 해당하는 feature vector로 나타내면 다음과 같다.
-  - R⊆Ω=[1,W]×[1,H]R⊆Ω=[1,W]×[1,H]
+  - R⊆Ω=[1,W]×[1,H]
 
-fR=[fR,1...fR,i...fR,K]T(2)fR=[fR,1...fR,i...fR,K]T(2)
+$$
+f_R=[f_{R,1}...f_{R,i}...f_{R,K}]^T \qquad(2)
+$$
 
 - R-MAC
   - R-MAC은 그냥 크기가 다른 여러 개의 Region 을 사용한 것이라 생각하면 쉽다.
-  - 일단 정사각형(square) 의 Region을 사용한다. (이미지의 WW 와 HH 가 다를 경우 짧은 쪽 기준)
+  - 일단 정사각형(square) 의 Region을 사용한다. (이미지의 W 와 H 가 다를 경우 짧은 쪽 기준)
   - 여러 스케일 값으로 Region 을 생성하게 되는데 이 때의 스케일을 결정하는 값을 Layer 라고 한다.
     - l=1l=1 인 경우가 가장 큰 스케일을 가지게 된다.
     - 이 Region은 가용한 최대 면적의 40% 이하로는 떨어지지 않는 크기로 결정하게 된다.
@@ -118,11 +109,19 @@ fR=[fR,1...fR,i...fR,K]T(2)fR=[fR,1...fR,i...fR,K]T(2)
 
 - Region 내에서 Max 값을 구하는 것은 비싼 비용이다. Approximate integral max-pooling 을 이용하여 근사하자.
 
-f̃ R,i=(∑p∈RXi(p)α)1α≃maxp∈RXi(p)=fR,i(3)f~R,i=(∑p∈RXi(p)α)1α≃maxp∈RXi(p)=fR,i(3)
+$$
+f̃_{R,i}=\left(∑_{p∈R}X_i(p)^α\right)^{\frac{1}{α}}≃ \underset{p∈R}{max} X_i(p)=f_{R,i} \qquad (3)
+$$
+
+
 
 - 제시된 Region 중 입력된 q 와 가장 유사한 Region 을 찾는 식은 다음과 같다.
 
-R̃ =argmaxR⊆Ωf̃ TRq‖f̃ R‖‖q‖R~=argmaxR⊆Ωf~RTq‖f~R‖‖q‖
+$$
+R̃ =argmax_{R⊆Ω}\frac {f̃^T_Rq}{‖f̃_R‖‖q‖}
+$$
+
+
 
 - 실험 결과는 다음과 같다.
 
@@ -143,8 +142,10 @@ R̃ =argmaxR⊆Ωf̃ TRq‖f̃ R‖‖q‖R~=argmaxR⊆Ωf~RTq‖f~R‖‖q‖
   - Query 이미지와 유사한 이미지 1개, 다른 이미지 1개를 이용하여 학습하는 구조.
 
 ![figure.7](https://norman3.github.io/papers/images/deepimgir/f07.png)
+$$
+L(I_q,I^+,I^−)=max(0,m+q^Td^−−q^Td^+)
+$$
 
-L(Iq,I+,I−)=max(0,m+qTd−−qTd+)L(Iq,I+,I−)=max(0,m+qTd−−qTd+)
 
 - `m` 은 margin 값을 의미하고 `+` 는 positive sample, `-` 는 negative sample을 의미한다.
 - Loss 함수가 유사 이미지를 찾는 형태로 정의되므로 당연히 성능이 올라갈 것이라는 것은 예상할만 일이지만,
@@ -152,21 +153,10 @@ L(Iq,I+,I−)=max(0,m+qTd−−qTd+)L(Iq,I+,I−)=max(0,m+qTd−−qTd+)
 
 ### 학습 데이터 정제 과정
 
-- 학습에 사용된 데이터는 Landmark 데이터. (이
-
-   
-
-  논문
-
-   
-
-  에서 사용된 데이터이다.)
-
+- 학습에 사용된 데이터는 Landmark 데이터. -> Neural Codes for Image Retrieval (https://arxiv.org/abs/1404.1777) 에서 사용된 데이터이다.
   - 약 214K 개의 데이터로 이루어져 있으며 672개의 명소로 이루어져있다.
   - 검색엔진(아마도 구글) 등을 이용하여 수집한 데이터로 정제 과정을 많이 거치지는 못했다.
-
 - DeepIR 논문에서의 전처리.
-
   - 제공된 URL 리스트 중 URL이 깨진 데이터는 더 이상 받을 수 없기에 이를 제외함.
   - 이미지 개수가 작은 특정 class는 모두 제외 처리
   - 심혈을 기울여 Oxford5k 와 Paris6k, Holiday 데이터 집합과 겹치는 데이터는 모두 제외.
@@ -202,15 +192,8 @@ L(Iq,I+,I−)=max(0,m+qTd−−qTd+)L(Iq,I+,I−)=max(0,m+qTd−−qTd+)
 ![figure.10](https://norman3.github.io/papers/images/deepimgir/f10.png)
 
 - 고민해 볼 만한 점
-
   - 학습 데이터는 보통 건물 등인데 이런 스타일이 아닌 Object 가 두드러지는 예제들 (예를 들면 물건 등)에서는 품질이 어느정도 될까?
-
-- 2017년 5월에 개선판이 arxiv에 올라옴. (
-
-  링크
-
-  )
-
+- 2017년 5월에 개선판이 arxiv에 올라옴. -> End-to-end Learning of Deep visual Representations for Image Retrieval(https://arxiv.org/pdf/1610.07940.pdf)
   - VGG16 대신 ResNet 을 쓰면 성능이 더 올라간다. (ResNet101)
   - 게다가 ResNet을 쓰면 힘들게 RPN을 할 필요 없이 R-MAC만으로 충분하다. (성능 향상의 효과가 없음)
   - 이미지의 여러 Resolution 을 사용하여 학습하면 성능이 올라간다. (Query와 학습 집합 둘 다에 대해 각각 테스트)
@@ -220,17 +203,7 @@ L(Iq,I+,I−)=max(0,m+qTd−−qTd+)L(Iq,I+,I−)=max(0,m+qTd−−qTd+)
 ![figure.11](https://norman3.github.io/papers/images/deepimgir/f11.png)
 
 - (참고)
-
-  - 최근 Postect
-
-     
-
-    한보형
-
-     
-
-    교수님 랩에서 이 성능을 넘는다는 유사 이미지 검색 관련 논문을 발표.
-
+  - 최근 Postech 한보형 교수님 랩에서 이 성능을 넘는다는 유사 이미지 검색 관련 논문을 발표.
     - [Large-Scala Image Retrieval with Attentive Deep Local Features](https://arxiv.org/pdf/1612.06321.pdf)
 
 ## Semantic-DeepIR
@@ -246,39 +219,22 @@ L(Iq,I+,I−)=max(0,m+qTd−−qTd+)L(Iq,I+,I−)=max(0,m+qTd−−qTd+)
 ### Dataset
 
 - ImageNet 등으로 학습된 결과로 얻어지는 유사 이미지의 결과를 일반 사용자에게 제시했을 때 별로 좋은 소리를 못들음. (복잡한 이미지의 경우)
-
 - 이 말은 Semantic 유사성을 가지는 이미지를 얻어내기 위한 다른 방안이 필요하다는 이야기.
-
 - 일단 이를 위한 학습 데이터를 어떻게 모으는지를 논의해보자.
-
 - 사실 재료가 될만한 데이터는 좀 있기는 하다.
-
   - MS-COCO (이미지 뿐만 아니라 caption 데이터도 포함)
-
   - VQA 데이터
-
-  - Visual Genome
-
-     
-
-    데이터 (108k 크기인데다가 caption도 포함)
-
+  - Visual Genome (http://visualgenome.org)데이터 (108k 크기인데다가 caption도 포함)
     - 이게 참 어려운 데이터이다. ( [관련 논문](http://visualgenome.org/static/paper/Visual_Genome.pdf) )
-
 - 현실적으로 Semantic Image 를 위한 학습용 데이터를 구축하기란 쉬운 일이 아니다.
-
   - 복잡한데다가 시간이 엄청나게 소요된다.
-
 - 그래서 좀 더 쉬운 방향으로 접근하기로 함. (Triplet 데이터)
-
   - 3 개의 이미지를 사용자에게 제시하고 이 중 더 가까운 이미지를 고르게 한다.
     - 주어진 쿼리 이미지에 대해 동일한 카테고리 이미지 하나와 무작위 추출 이미지 하나로 구성된 Tuple.
     - 이를 35명의 연구자가 평가함. (남자 22, 여자 13명) 데이터는 약 3,000개의 triplet을 구성함.
     - 추가로 50 개의 triplet을 표준 집합으로 정의하고 25명으부터 평가를 얻음.
   - 이 때 ‘더 유사하다’ 라는 의미를 애매하게 사용하지 않고 구체적으로 명시해서 최대한 bias가 없도록 한다.
-
 - 랭킹 평가를 위해서 추가 작업을 진행
-
   - 적당한 평가 지표를 만들어 사용자들이 평가한 것을 다른 사람과 비교해 볼 수 있도록 평가 지표를 만듬. (합의 스코어)
   - leave-one-out 이라는 방식이라고 함.
   - 순위 질문을 이용해서 사용자가 평가를 내리면 이와 동일한 평가를 한 다른 사용자의 비율로 측정
@@ -306,29 +262,59 @@ L(Iq,I+,I−)=max(0,m+qTd−−qTd+)L(Iq,I+,I−)=max(0,m+qTd−−qTd+)
   - Semantic 유사성에 대한 학습은 End-to-End 방식으로 학습하게 된다.
 - 별로 어려운게 없으니 그냥 바로 Loss를 보자면,
 
-L=∑q∑d+,d−Lv(q,d+,d−)L=∑q∑d+,d−Lv(q,d+,d−)
+$$
+L=\underset{q}∑\underset{d^+,d^−}∑L_v(q,d^+,d^−)
+$$
 
-Lv(q,d+,d−)=12max(0,m−ϕTqϕ++ϕTqϕ−)(1)Lv(q,d+,d−)=12max(0,m−ϕqTϕ++ϕqTϕ−)(1)
+$$
+L_v(q,d^+,d^−)=\frac{1}{2}max(0,m−ϕ^T_qϕ_++ϕ^T_qϕ_−)\qquad (1)
+$$
 
-- 단, ϕ(q)=ϕqϕ(q)=ϕq, ϕ(d+)=ϕ+ϕ(d+)=ϕ+, ϕ(d−)=ϕ−ϕ(d−)=ϕ−
-- ϕ:I→RDϕ:I→RD
-- 여기서 ϕϕ 자체는 이미지 representation 이다.
-- 하지만 두 이미지간의 semantic 유사성을 확인하는 방법은 (즉, ++와 −−는) tf-idf를 활용하여 선정하게 된다.
+
+
+- 단, 
+  $$
+  ϕ(q)=ϕ_q,\ ϕ(d^+)=ϕ_+,\ ϕ(d^−)=ϕ_−
+  $$
+
+  $$
+  ϕ:I→R^D
+  $$
+
+- 여기서 ϕ자체는 이미지 representation 이다.
+
+- 하지만 두 이미지간의 semantic 유사성을 확인하는 방법은 (즉, +와 −는) tf-idf를 활용하여 선정하게 된다.
+
 - 이런 방식으로 이미지 representation을 semantic embedding 공간에 사상하는 형태로 구성하게 된다.
+
   - Word2Vec 방식을 한번 생각해보자.
 
 ### Joint Visual & Text Embeding
 
 - 앞서 사용한 방식은 단순히 Text 정보로 Loss 를 구성하는 것이나 마찬가지.
+
 - 하지만 visual representation 과 text semantic 정보를 적절히 혼용한 방법은 존재하지 않는 것일까?
+
   - 왜 없겠나. 두 정보를 적절하게 섞은 Loss를 만들면 되지.
 
-Lt1(q,d+,d−)=12max(0,m−ϕTqθ++ϕTqθ−)(2)Lt1(q,d+,d−)=12max(0,m−ϕqTθ++ϕqTθ−)(2)
+  - $$
+    L_{t1}(q,d^+,d^−)=\frac{1}{2}max(0,m−ϕ^T_qθ_{+}+ϕ^T_qθ_−)\qquad (2)
+    $$
 
-Lt2(q,d+,d−)=12max(0,m−θTqϕ++θTqϕ−)(3)Lt2(q,d+,d−)=12max(0,m−θqTϕ++θqTϕ−)(3)
+    $$
+    L_{t2}(q,d^+,d^−)=\frac{1}{2}max(0,m−θ^T_qϕ_{+}+θ^T_qϕ−)\qquad (3)
+    $$
 
-- 단, ϕ:I→RDϕ:I→RD , θ:T→RDθ:T→RD
-- θθ 의 경우 Embeding 크기를 맞추기 위해 WTt‖WTt‖2WTt‖WTt‖2 를 사용한다. (tt 가 그 역할을 수행)
+
+
+
+- 단,
+
+- $$
+  ϕ:I→R^D, θ:T→R^D
+  $$
+
+- θθ 의 경우 Embeding 크기를 맞추기 위해 $$ \frac{W^Tt}{‖W^Tt‖_2} $$를 사용한다. (t 가 그 역할을 수행)
 
 ### 실험
 
