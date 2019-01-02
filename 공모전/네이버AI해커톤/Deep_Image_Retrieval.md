@@ -52,7 +52,7 @@
 
 - 먼저 pretrained CNN 을 사용하되 FC 레이어는 제거.
 
-- Conv 레이어는 (W×H×KW×H×K) 크기가 된다. 모두 Relu Activator 를 사용한다고 가정한다.
+- Conv 레이어는 (W×H×K) 크기가 된다. 모두 Relu Activator 를 사용한다고 가정한다.
 
 - W×H를 새로운 변수인 X로 표현해보자.
   $$
@@ -61,12 +61,13 @@
 
   - 따라서 Xi 는 2D Tensor를 나타내게 된다.
 
-- 추가로 Conv의 position 정보를 pp 하고 하자. 이 때 Xi(p) 는 position p 에 해당하는 2차원 Tensor를 의미하게 된다.
+- 추가로 Conv의 position 정보를 p 라고 하자. 이 때 $$X_i(p)$$ 는 position $$p$$ 에 해당하는 2차원 Tensor를 의미하게 된다.
 
-- 새로운 feature vector f 를 정의한다.
+- 새로운 feature vector $$f$$ 를 정의한다.
   $$
   f_Ω=[f_Ω,1...f_{Ω,i}...f_{Ω,K}]^T,with\ f_{Ω,i}=max_{p∈Ω}Xi(p) \qquad (1)
   $$
+
 
 
 - 결국 `K` 크기를 가지는 1차원 벡터가 된다.
@@ -83,9 +84,9 @@
 ### R-MAC
 
 - Region feature vector
-  - 앞서 이미지를 나타내는 feature vector fΩfΩ 를 살펴보았다.
+  - 앞서 이미지를 나타내는 feature vector $$f_Ω$$ 를 살펴보았다.
   - 이것을 어떤 특정 사각형 Region에 해당하는 feature vector로 나타내면 다음과 같다.
-  - R⊆Ω=[1,W]×[1,H]
+  - $$R⊆Ω=[1,W]×[1,H]$$
 
 $$
 f_R=[f_{R,1}...f_{R,i}...f_{R,K}]^T \qquad(2)
@@ -95,7 +96,7 @@ $$
   - R-MAC은 그냥 크기가 다른 여러 개의 Region 을 사용한 것이라 생각하면 쉽다.
   - 일단 정사각형(square) 의 Region을 사용한다. (이미지의 W 와 H 가 다를 경우 짧은 쪽 기준)
   - 여러 스케일 값으로 Region 을 생성하게 되는데 이 때의 스케일을 결정하는 값을 Layer 라고 한다.
-    - l=1l=1 인 경우가 가장 큰 스케일을 가지게 된다.
+    - $$l=1$$ 인 경우가 가장 큰 스케일을 가지게 된다.
     - 이 Region은 가용한 최대 면적의 40% 이하로는 떨어지지 않는 크기로 결정하게 된다.
   - 아래 그림을 보면 대충 어찌 뽑히는지 알 수 있다.
 
@@ -115,7 +116,7 @@ $$
 
 
 
-- 제시된 Region 중 입력된 q 와 가장 유사한 Region 을 찾는 식은 다음과 같다.
+- 제시된 Region 중 입력된 $$q\ $$와 가장 유사한 Region 을 찾는 식은 다음과 같다.
 
 $$
 R̃ =argmax_{R⊆Ω}\frac {f̃^T_Rq}{‖f̃_R‖‖q‖}
@@ -308,13 +309,14 @@ $$
 
 
 
+
 - 단,
 
 - $$
   ϕ:I→R^D, θ:T→R^D
   $$
 
-- θθ 의 경우 Embeding 크기를 맞추기 위해 $$ \frac{W^Tt}{‖W^Tt‖_2} $$를 사용한다. (t 가 그 역할을 수행)
+- θ 의 경우 Embeding 크기를 맞추기 위해 $$ \frac{W^Tt}{‖W^Tt‖_2} $$를 사용한다. (t 가 그 역할을 수행)
 
 ### 실험
 
@@ -322,7 +324,7 @@ $$
 - 2 Layer의 R-MAC 적용
 - tf-idf를 활용한 caption encoding (NLTK를 활용해서 word stemming 과정을 거침)
 - 64 batch (triplet)
-- ADAM optimizer를 사용하고 lr은 10−510−5 에서 8k 반복 후 \(10^-6)으로 줄임
+- ADAM optimizer를 사용하고 lr은 $$10^{−5}$$에서 8k 반복 후 $$10^{-6}$$으로 줄임
 - 측정지표
   - NDCG (Normalized discounted cumulative gain)
   - PCC (Pearson’s correlation coefficient)
