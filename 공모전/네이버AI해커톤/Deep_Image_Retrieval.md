@@ -70,6 +70,7 @@
 
 
 
+
 - 결국 `K` 크기를 가지는 1차원 벡터가 된다.
 - 가장 중요한 단점은 모든 지역(localization) 정보가 사라진다.
 - MAC 을 이용한 유사도 평가
@@ -310,6 +311,7 @@ $$
 
 
 
+
 - 단,
 
 - $$
@@ -333,4 +335,4 @@ $$
 
 ![figure.15](https://norman3.github.io/papers/images/deepimgir/f15.png)
 
-![figure.16](https://norman3.github.io/papers/images/deepimgir/f16.png)
+# ![figure.16](https://norman3.github.io/papers/images/deepimgir/f16.png)
