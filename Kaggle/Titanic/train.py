@@ -17,8 +17,8 @@ Embarked: 탑승 항구 => C = Cherbourg, Q = Queenstown, S = Southampton
 '''
 
 
-train_path = 'train.csv'
-test_path = 'test.csv'
+train_path = './dataset/train/train.csv'
+test_path = './dataset/test/test.csv'
 train_df = pd.read_csv(train_path)
 test_df = pd.read_csv(test_path)
 
@@ -48,6 +48,12 @@ plt.show()
 
 cross_tab = pd.crosstab([train_df['Sex'],
                 train_df['Survived']],
-                train_df['Pclass'],
-                margins=True).style.background_gradient(cmap='summer_r')
+                train_df['Pclass'])
+
+# now stack and reset
+stacked = cross_tab.stack().reset_index().rename(columns={0: 'value'})
+
+# plot grouped bar chart
+sns.barplot(x=stacked.period, y=stacked.value, hue=stacked.mark)
+
 
