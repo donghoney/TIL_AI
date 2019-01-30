@@ -96,11 +96,13 @@ def main():
     KS200_name = 'KOSPI200.csv'
     KS200_symbol_update = False  # KOSPI200 종목코드,이름을 저장한 csv가 없을 경우 True
     KS200_rawchart_download = False #KOSPI200 csv를 통해 지정한 날짜로 주가 데이터 크롤링한다. 주가 데이터 csv가 없을 경우, True
-
+    KS200_jisu = False  # KOSPI 200 지수 데이터 크롤링
     if KS200_symbol_update == True:
         KS200_list=write_KS200_symbol(data_path,KS200_name)
+        print('KOSPI 200 종목 리스트를 업데이트 합니다.')
     else :
         KS200_list=read_KS200_symbol(data_path,KS200_name)
+        print('KOSPI 200 종목 리스트를 업데이트 하지 않습니다.')
     print(len(KS200_list))
 
     if KS200_rawchart_download == True:
@@ -115,11 +117,18 @@ def main():
              code = i[0]
              name = i[1]
              write_Ticker(data_path,start_date,end_date,code,name)
+        print('KOSPI 200 종목 각각의 주식 데이터를 크롤링 합니다.')
 
     else :
-        print('Select Do not crawl data')
+        print('KOSPI 200 종목 각각의 주식 데이터를 크롤링하지 않습니다.')
         pass
-
+    if KS200_jisu == True:
+        # 코스피 200 지수 다운로드하기
+        df_krx = fdr.DataReader('KS200','2015')
+        df_krx.to_csv('./data/KS200_jisu.csv', encoding='ms949',index=True)
+        print('KOSPI 200 지수를 업데이트 합니다.')
+    else :
+        print('KOSPI 200 지수를 업데이트 하지 않습니다.')
     df = read_csv(data_path, KS200_list[1][0])
     print(df.describe())
 
@@ -135,33 +144,9 @@ plt.rcParams["figure.figsize"] = (14,4)
 plt.rcParams['lines.linewidth'] = 3
 plt.rcParams["axes.grid"] = True
 
-# 한국 거래소 상장종목 전체
-#df_krx = fdr.StockListing('KRX')
-#print('한국 거래소 상장종목')
-#print(df_krx.columns)
-#print(df_krx.loc[:,'Symbol':'Sector'].head(100))
-#print(df_krx.head(50))
-#print(len(df_krx))
-#df_krx_csv=df_krx.to_csv('./data/df_krx.csv', encoding='ms949',index=False)
+
 
 # KS200 지수 다운로드
 #df_KS200 = fdr.StockListing('KOSDAQ')
 #df_KS200.to_csv('./data/KOSDAQ_List.csv',encoding='ms949',index=False)
 
-
-start_year = '2015'
-end_year= '2018'
-Symbols=[]
-def KS200_download_csv(start_year,end_year,Symbols):
-
-    for i in range(start_year,end_year):
-        for j in range(Symbols):
-            df = fdr.DataReader(j,i)
-            df.tocsv('./data/{0}_{1}.csv'.format(j,i),encoding='ms949',index=True)
-
-
-
-
-#df['Open'].plot()
-#df['Close'].plot()
-#plt.show()
