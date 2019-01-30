@@ -21,9 +21,9 @@ def calculate_p_val(df,start,end):
     returns = price.pct_change()[1:]
     n = len(returns)
     test_statistic = ((returns.mean() - 0 )/ (returns.std() / np.sqrt( n - 1 )))
-    print('t test statistic : ', test_statistic)
+    #print('t test statistic : ', test_statistic)
     p_val = ( 1 - norm.cdf(test_statistic,0,1))
-    print('P - value is : ' ,p_val)
+    #print('P - value is : ' ,p_val)
     return p_val
 
 
@@ -34,9 +34,20 @@ def stock_eval():
     KS200_jisu_name = 'KS200_jisu.csv'
     KS200_list=read_KS200_symbol(data_path,KS200_name)
     KS200_jisu=read_csv(data_path,KS200_jisu_name)
-    print(len(KS200_name))
+    print(KS200_list)
+    start = '20150102'
+    end = '20180601'
+    p_val_list = []
+    for i,j in KS200_list:
+        df = read_csv(data_path, i)
+        p_val=calculate_p_val(df,start,end)
+        p_val_list.append((i,j,p_val))
+    print(p_val_list)
+    sorted_p_val=sorted(p_val_list, key=lambda x : x[2])
+    print(len(KS200_list))
     print(len(KS200_jisu))
-
-stock_eval()
+    print(sorted_p_val[:100])
+if __name__ == "__main__":
+    stock_eval()
 
 
