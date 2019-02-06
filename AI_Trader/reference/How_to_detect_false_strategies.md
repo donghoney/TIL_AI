@@ -30,7 +30,7 @@ Let’s play a bit with this approximation to see
 
 #### Accuracy of the Expected Maximum Sharpe Ratio formula
 
-```
+```python
 import pandas as pd
 import numpy as np
 from scipy.stats import norm
@@ -82,7 +82,7 @@ ax.title.set_size(32)
 
 #### Examples of Expected Maximum Sharpe Ratios for fluke strategies
 
-```
+```python
 mean_sharpe = 0
 var_sharpe = 1 / 252
 std_sharpe = np.sqrt(var_sharpe)
@@ -114,7 +114,7 @@ It means that after only 100 trials, we can find a strategy having a Sharpe rati
 
 Let’s see how the expected maximum Sharpe ratio varies with an increasing standard deviation of the Sharpe ratio Normal distribution.
 
-```
+```python
 mean_sharpe = 0
 var_sharpes = [annual_var / 252 for annual_var in [1, 4, 10]]
 std_sharpes = [np.sqrt(var_sharpe) for var_sharpe in var_sharpes]
@@ -158,7 +158,7 @@ The Deflated Sharpe Ratio depends on
 - the sample size $T$, e.g. on how many trading days $T$ the strategy has been backtested,
 - the first four moments of the alpha / strategy / manager / fund returns to discount for exceptional returns.
 
-```
+```python
 def compute_deflated_sharpe_ratio(*,
                                   estimated_sharpe,
                                   sharpe_variance,
@@ -178,7 +178,7 @@ Let’s consider a strategy that has a 2.5 annual Sharpe ratio. This strategy wa
 
 **Question:** What is the probability that this strategy is totally spurious?
 
-```
+```python
 compute_deflated_sharpe_ratio(estimated_sharpe=2.5 / np.sqrt(252),
                               sharpe_variance=0.5 / 252,
                               nb_trials=100,
