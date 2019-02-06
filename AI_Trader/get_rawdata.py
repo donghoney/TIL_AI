@@ -96,7 +96,7 @@ def main():
     KS200_name = 'KOSPI200.csv'
     KS200_symbol_update = False  # KOSPI200 종목코드,이름을 저장한 csv가 없을 경우 True
     KS200_rawchart_download = False #KOSPI200 csv를 통해 지정한 날짜로 주가 데이터 크롤링한다. 주가 데이터 csv가 없을 경우, True
-    KS200_jisu = False  # KOSPI 200 지수 데이터 크롤링
+    KS200_jisu = True  # KOSPI 200 지수 데이터 크롤링
     if KS200_symbol_update == True:
         KS200_list=write_KS200_symbol(data_path,KS200_name)
         print('KOSPI 200 종목 리스트를 업데이트 합니다.')
@@ -129,8 +129,8 @@ def main():
         print('KOSPI 200 지수를 업데이트 합니다.')
     else :
         print('KOSPI 200 지수를 업데이트 하지 않습니다.')
-    df = read_csv(data_path, KS200_list[1][0])
-    print(df.describe())
+    #df = read_csv(data_path, KS200_list[1][0])
+    #print(df.describe())
 
 
 if __name__ == "__main__":
@@ -150,4 +150,3 @@ plt.rcParams["axes.grid"] = True
 # KS200 지수 다운로드
 #df_KS200 = fdr.StockListing('KOSDAQ')
 #df_KS200.to_csv('./data/KOSDAQ_List.csv',encoding='ms949',index=False)
-
