@@ -3,7 +3,7 @@ from keras.models import Model
 from keras.callbacks import TensorBoard
 from keras.datasets import mnist
 import numpy as np
-
+import keras.callbacks
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 x_train = x_train.astype('float32') / 255.
@@ -39,6 +39,8 @@ def train_model():
     decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same')(x)
 
     autoencoder = Model(input_img, decoded)
+
+
     autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy',metrics=['accuracy'])
 
     autoencoder.fit(x_train_noisy, x_train,
