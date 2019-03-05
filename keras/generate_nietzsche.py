@@ -41,16 +41,5 @@ model.add(layers.Dense(len(chars), activation='softmax'))
 optimizer= keras.optimizers.RMSprop(lr=0.01)
 model.compile(loss='categorical_crossentropy',optimizer=optimizer)
 
-def sample(preds, temperature=1.0):
-    preds = np.asarray(preds)
-    preds = np.log(preds) / temperature
-    exp_preds = np.exp(preds)
-    preds = exp_preds / np.sum(exp_preds)
-    probas = np.random.multinomial(1, preds, 1)
-    return np.argmax(probas)
-
-import random
-import sys
-
-random.seed(42)
-start_index = random.randint(0, len(text) - maxlen - 1)
+model.fit(x,y,batch_size=128,epochs=20,verbose=1)
+model.save('my_model.h5')
