@@ -1,4 +1,5 @@
-[PAPER REVIEW](https://blog.lunit.io/category/paper-review/)[2018년 APRIL 12일](https://blog.lunit.io/2018/04/12/group-normalization/)
+[PAPER REVIEW]
+출처 : (https://blog.lunit.io/category/paper-review/)[2018년 APRIL 12일](https://blog.lunit.io/2018/04/12/group-normalization/)
 
 # Group Normalization
 
