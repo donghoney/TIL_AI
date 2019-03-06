@@ -1,6 +1,6 @@
 # 최대우도추정(Maximum Likelihood Estimation)
 
-#### 23 Sep 2017 | [Maximum Likelihood Estimation](https://ratsgo.github.io/blog/tags/#maximum-likelihood-estimation)
+출처 : (https://ratsgo.github.io/blog/tags/#maximum-likelihood-estimation)
 
 이번 글에서는 최대우도추정(Maximum Likelihood Estimation)에 대해 살펴보도록 하겠습니다. 이 글은 Ian Goodfellow 등이 집필한 Deep Learning Book과 위키피디아, 그리고 [조현제 님의 자료](https://www.google.co.kr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjL35GXl8DWAhWIi7wKHSu-C2IQFgglMAA&url=http%3A%2F%2Fdatabaser.net%2Fmoniwiki%2Fpds%2FBayesianStatistic%2F%25EB%25B2%25A0%25EC%259D%25B4%25EC%25A6%2588_%25EC%25A0%2595%25EB%25A6%25AC%25EC%2599%2580_MLE.pdf&usg=AFQjCNEfWz3mbEgF4zVu7qc-iW6azR2jRQ)를 정리했음을 먼저 밝힙니다. 그럼 시작하겠습니다.
 
