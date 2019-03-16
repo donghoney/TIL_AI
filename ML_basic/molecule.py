@@ -20,22 +20,20 @@ def molecule2(letters):
     ans = string[0]
     numlist = []
     for idx, char in enumerate(string[1:]):
-        print(idx,char)
-        print(string[idx],char)
+
         if string[idx].islower() and char.isupper():
             ans += '-'
         elif string[idx].isupper() and char.isupper():
             ans += '-'
         elif string[idx].isupper() and char.isnumeric():
             ans += '-'
+        elif string[idx].islower() and char.isnumeric():
+            ans += '-'
         elif char.isnumeric():
             numlist.append(char)
         ans += char
-    print(ans)
     anslst = ans.split('-')[:-1]
     numlist = [i for i in ans.split('-')[-1]]
-    print(anslst)
-    print(numlist)
     if len(anslst) != len(numlist):
         print('error')
     else:
@@ -49,4 +47,4 @@ def molecule2(letters):
         sum = sum.replace('1', '')
         print(sum)
 
-molecule2('COACl1234')
+#molecule2('COACl1234')
