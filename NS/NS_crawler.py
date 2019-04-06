@@ -8,6 +8,7 @@ import pandas as pd
 import multiprocessing
 from multiprocessing import Pool
 from readJson import readJson,writeExcel
+import argparse
 
 def crawl(keyword,i):
 	url = 'https://search.shopping.naver.com/search/all.nhn?query={}&pagingSize=80&viewType=list&pagingIndex={}&sort=rel&cat_id=&frm=NVSHPAG'.format(keyword,i)
@@ -87,7 +88,13 @@ def getReviewIndex(nvMid):
 	}
 	data = requests.post(url, data=header)
 	result = BeautifulSoup(data.content, 'html.parser')
-	endPage = re.findall('\d+',result.select('a.next_end')[0]['onclick'])[0]
+	reviewPaging = result.find('div',{'class':'co_paginate'})
+	try:
+		a = reviewPaging.findAll('a')
+		endPage = re.findall('\d+',a[-1]['onclick'])[0]
+	except:
+		endPage = 1
+
 	print(endPage)
 	return endPage
 
@@ -132,24 +139,30 @@ def multiprocessing_review_crawl(i):
 	reviewInfos = reviewParse(htmlDoc)
 	return reviewInfos
 
-if __name__ == '__main__':
+def main():
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--k',type=str,default='설화수',
+						help='what is the keyword for searching')
+	args = parser.parse_args()
+
 	global keyword
-	keyword = '설화수'
+	keyword = args.k
 
 	itemListCrawling = True
 	reviewCrawling = True
+	workers = 4
 
 	# itemListCrawling : 검색 -> 아이템 리스트 크롤링
 	# reviewCrawling : 아이템 리스트가 저장되어있는 json파일을 읽어서
 	# 해당 url을 크롤링하여 각 id별 리뷰데이터를 크롤링
 
 	if itemListCrawling :
-		index = 20
+		index = 20   # 80 * index 의 개수만큼 search
 		path1 = './{}.json'.format(keyword)
 		total_products = []
 
 		num_list= [i for i in range(1,index+1)]
-		with Pool(processes=4) as pool:
+		with Pool(processes=workers) as pool:
 			products=pool.map(multiprocessing_crawl,num_list)
 			#print(len(products))
 			for product in products :
@@ -171,7 +184,7 @@ if __name__ == '__main__':
 			current_nvMid=nvMid
 			reviewIndex=int(getReviewIndex(current_nvMid))
 			review_index_list = [i for i in range(1,reviewIndex+1)]
-			with Pool(processes=4) as pool:
+			with Pool(processes=workers) as pool:
 				reviewInfos=pool.map(multiprocessing_review_crawl,review_index_list)
 				for reviewInfo in reviewInfos:
 					total_reviews+=reviewInfo
@@ -183,6 +196,7 @@ if __name__ == '__main__':
 			df=readJson(nvMid)
 			writeExcel(df,nvMid)
 
-
+if __name__=='__main__':
+	main()
 
 
