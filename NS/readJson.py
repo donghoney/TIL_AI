@@ -2,22 +2,18 @@ import pandas as pd
 
 def readJson(name):
     try:
-        fileName='{}_products.json'.format(name)
-        df = pd.read_json(fileName)
+        path='./{}.json'.format(name)
+        df = pd.read_json(path)
         return df
-    except:
-        print('이름에 맞는 json파일이 없습니다.')
+    except Exception as e:
+        print('json파일을 읽을 수 없음',e)
 
 
 def writeExcel(df,name):
     try:
-        fileName = '{}_products.xlsx'.format(name)
-        writer=pd.ExcelWriter(fileName)
+        path = './{}.xlsx'.format(name)
+        writer=pd.ExcelWriter(path)
         df.to_excel(writer,'sheet1')
         writer.save()
-    except:
-        print('엑셀파일을 저장할 수 없습니다.')
-
-name = '설화수'
-df=readJson(name)
-writeExcel(df,name)
+    except Exception as e:
+        print('엑셀을 쓸수 없음',e)

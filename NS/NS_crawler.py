@@ -3,15 +3,22 @@ from bs4 import BeautifulSoup
 import re
 import datetime
 import json
+import os
+import pandas as pd
+import multiprocessing
+from multiprocessing import Pool
+from readJson import readJson,writeExcel
 
-def crawl(keyword):
-	url = 'https://search.shopping.naver.com/search/all.nhn?query={}&cat_id=&frm=NVSHATC'.format(keyword)
+def crawl(keyword,i):
+	url = 'https://search.shopping.naver.com/search/all.nhn?query={}&pagingSize=80&viewType=list&pagingIndex={}&sort=rel&cat_id=&frm=NVSHPAG'.format(keyword,i)
 	data = requests.get(url)
 	print(data.status_code,url)
 	return data.content
 
+
 def getProductInfo(li):
 	img = li.find('img')
+	nvMid=li['data-expose-id']
 	alt = img['alt']
 	tit = li.find('a',{'class':'tit'})
 	href = tit['href']
@@ -29,15 +36,24 @@ def getProductInfo(li):
 	etc = info.find('span',{'class':'etc'})
 	em = etc.select('em')
 	numOfReviews=em[0].text.replace(',','')
-	keepCount = etc.find('em',{'class':'_keepCount'})
-	print(keepCount)
+	#keepCount = li.find('em',{'nvmid':nvMid})
+	#print(keepCount)
 	first_date = '/'.join(re.findall('\d+',etc.select('span.date')[0].text))
 	graph = etc.find('span',{'class':'star_graph'})
 	star = float(re.findall('\d+',graph.select('span')[0]['style'])[0])/100
 
 
-	return {'first_date':first_date,'name': alt,'star':star, 'numOfReviews':numOfReviews,'lowest_price': lowest_price,'numOfSellers':numOfSellers, 'cat1': category1, 'cat2': category2, 'cat3': category3, 'href': href}
-
+	return {'first_date':first_date,
+			'numOfReviews':numOfReviews,
+			'lowestPrice': lowest_price,
+			'numOfSellers':numOfSellers,
+			'cat1': category1,
+			'cat2': category2,
+			'cat3': category3,
+			'href': href,
+			'name': alt,
+			'star':star,
+			'nvMid': nvMid }
 
 
 def parse(htmlDoc):
@@ -48,17 +64,125 @@ def parse(htmlDoc):
 	products =[]
 	for li in lis:
 		product = getProductInfo(li)
-		products.append(product)
+		if product:
+			products.append(product)
 
 	return products
 
-keyword = '설화수'
-htmlDoc = crawl(keyword)
-products = parse(htmlDoc)
-print('num of products : ',len(products))
-print(products)
+def multiprocessing_crawl(i):
+	htmlDoc = crawl(keyword,i)
+	products = parse(htmlDoc)
+	#print('num of products : ',len(products))
+	#print(products)
+	return products
 
-file = open('./{}_products.json'.format(keyword),'w+')
-file.write(json.dumps(products))
+def getReviewIndex(nvMid):
+	url = 'https://search.shopping.naver.com/detail/review_list.nhn'
+	header = {
+		'nvMid': nvMid,
+		'page': 1,
+		'reviewSort': 'accuracy',
+		'reviewType': 'all',
+		'ligh': 'true'
+	}
+	data = requests.post(url, data=header)
+	result = BeautifulSoup(data.content, 'html.parser')
+	endPage = re.findall('\d+',result.select('a.next_end')[0]['onclick'])[0]
+	print(endPage)
+	return endPage
+
+def reviewCrawl(i):
+	url = 'https://search.shopping.naver.com/detail/review_list.nhn'
+
+	header = {
+		'nvMid':current_nvMid,
+		'page':i,
+		'reviewSort':'accuracy',
+		'reviewType':'all',
+		'ligh':'true'
+	}
+	data = requests.post(url,data=header)
+	print(data.status_code,url)
+	return data.content
+def getReviewInfo(atcArea):
+	star=atcArea.select('span.curr_avg')[0].text
+	date=atcArea.select('span.date')[0].text.replace('.','/')[:-1]
+	subject = atcArea.select('p')[0].text
+	atc = atcArea.select('div.atc')[0].text
+
+	return {'star':star,
+			'date':date,
+			'subject':subject,
+			'atc':atc }
+
+def reviewParse(htmlDoc):
+	result = BeautifulSoup(htmlDoc,'html.parser')
+	ul = result.find('ul',{'class':'lst_review'})
+	atcAreas = ul.findAll('div',{'class':'atc_area'})
+	reviewsInfo =[]
+
+	for atcArea in atcAreas:
+		reviewInfo = getReviewInfo(atcArea)
+		if reviewInfo:
+			reviewsInfo.append(reviewInfo)
+
+	return reviewsInfo
+def multiprocessing_review_crawl(i):
+	htmlDoc = reviewCrawl(i)
+	reviewInfos = reviewParse(htmlDoc)
+	return reviewInfos
+
+if __name__ == '__main__':
+	global keyword
+	keyword = '설화수'
+
+	itemListCrawling = True
+	reviewCrawling = True
+
+	# itemListCrawling : 검색 -> 아이템 리스트 크롤링
+	# reviewCrawling : 아이템 리스트가 저장되어있는 json파일을 읽어서
+	# 해당 url을 크롤링하여 각 id별 리뷰데이터를 크롤링
+
+	if itemListCrawling :
+		index = 20
+		path1 = './{}.json'.format(keyword)
+		total_products = []
+
+		num_list= [i for i in range(1,index+1)]
+		with Pool(processes=4) as pool:
+			products=pool.map(multiprocessing_crawl,num_list)
+			#print(len(products))
+			for product in products :
+				total_products+=product
+
+		file = open(path1,'w+')
+		file.write(json.dumps(total_products))
+		file.close()
+
+	if reviewCrawling :
+		df = readJson(keyword)
+		nvMids = list(df['nvMid'])
+		global current_nvMid
+
+		for nvMid in nvMids:
+			total_reviews = []
+			path2 = './{}.json'.format(nvMid)
+			print(path2)
+			current_nvMid=nvMid
+			reviewIndex=int(getReviewIndex(current_nvMid))
+			review_index_list = [i for i in range(1,reviewIndex+1)]
+			with Pool(processes=4) as pool:
+				reviewInfos=pool.map(multiprocessing_review_crawl,review_index_list)
+				for reviewInfo in reviewInfos:
+					total_reviews+=reviewInfo
+
+			print(total_reviews)
+			file = open(path2,'w+')
+			file.write(json.dumps(total_reviews))
+			file.close()
+			df=readJson(nvMid)
+			writeExcel(df,nvMid)
+
+
 
 
