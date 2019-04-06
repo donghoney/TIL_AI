@@ -41,8 +41,11 @@ def getProductInfo(li):
 	#print(keepCount)
 	first_date = '/'.join(re.findall('\d+',etc.select('span.date')[0].text))
 	graph = etc.find('span',{'class':'star_graph'})
-	star = float(re.findall('\d+',graph.select('span')[0]['style'])[0])/100
-
+	star =0
+	try:
+		star = float(re.findall('\d+',graph.select('span')[0]['style'])[0])/100
+	except:
+		pass
 
 	return {'first_date':first_date,
 			'numOfReviews':numOfReviews,
