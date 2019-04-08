@@ -92,6 +92,7 @@ def getReviewIndex(nvMid):
 	data = requests.post(url, data=header)
 	result = BeautifulSoup(data.content, 'html.parser')
 	reviewPaging = result.find('div',{'class':'co_paginate'})
+
 	try:
 		a = reviewPaging.findAll('a')
 		endPage = re.findall('\d+',a[-1]['onclick'])[0]
@@ -142,6 +143,79 @@ def multiprocessing_review_crawl(i):
 	reviewInfos = reviewParse(htmlDoc)
 	return reviewInfos
 
+def getSellerIndex(nvMid):
+	url = 'https://search.shopping.naver.com/detail/price_compare_area.nhn'
+
+	header = {
+		'nvMid': nvMid,
+		'page': 1,
+		'frm': '',
+		'query':'',
+		'mall':'',
+		'ligh': 'true'
+	}
+
+	data = requests.post(url, data=header)
+	result = BeautifulSoup(data.content, 'html.parser')
+	reviewPaging = result.find('div', {'class': 'co_paginate'})
+
+	try:
+		a = reviewPaging.findAll('a')
+		endPage = re.findall('\d+', a[-1]['onclick'])[0]
+	except:
+		endPage = 1
+
+	print(endPage)
+	return endPage
+
+def sellerCrawl(i):
+	url = 'https://search.shopping.naver.com/detail/price_compare_area.nhn'
+
+	header = {
+		'nvMid': cur_nvMid,
+		'page': 1,
+		'frm': '',
+		'query': '',
+		'mall': '',
+		'ligh': 'true'
+	}
+	data = requests.post(url,data=header)
+	print(data.status_code,url)
+	return data.content
+
+def getSellerInfo(tbl):
+
+	seller=tbl.select('td > a')[0]['data-mall-name']
+	date=tbl.select('td.td_price > a')[0]['data-rcv-date'].replace('.','/')[:-1]
+	subject = tbl.select('p')[0].text
+	atc = tbl.select('div.atc')[0].text
+	shippingFee =''
+	return {'seller':seller,
+			'date':date,
+			'name':subject,
+			'price':atc,
+			'shippingFee':shippingFee
+			}
+
+def sellerParse(htmlDoc):
+	result = BeautifulSoup(htmlDoc,'html.parser')
+	priceDiffs = result.find('div',{'class':'price_diff_lst'})
+	tbls = priceDiffs.findAll('table', {'class': 'tbl tbl_v'})
+
+	#print(tbls)
+	sellersInfo =[]
+	for tbl in tbls:
+		sellerInfo = getSellerInfo(tbl)
+		if sellerInfo:
+			sellersInfo.append(sellerInfo)
+
+	return sellersInfo
+
+def multiprocessing_seller_crawl(i):
+	htmlDoc = sellerCrawl(i)
+	sellerInfos = sellerParse(htmlDoc)
+	return sellerInfos
+
 def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--k',type=str,default='설화수',
@@ -151,8 +225,9 @@ def main():
 	global keyword
 	keyword = args.k
 
-	itemListCrawling = True
-	reviewCrawling = True
+	itemListCrawling = False
+	reviewCrawling = False
+	sellerCrawling = True
 	workers = 4
 
 	# itemListCrawling : 검색 -> 아이템 리스트 크롤링
@@ -182,7 +257,7 @@ def main():
 
 		for nvMid in nvMids:
 			total_reviews = []
-			path2 = './{}.json'.format(nvMid)
+			path2 = './{}_review.json'.format(nvMid)
 			print(path2)
 			current_nvMid=nvMid
 			reviewIndex=int(getReviewIndex(current_nvMid))
@@ -198,6 +273,24 @@ def main():
 			file.close()
 			df=readJson(nvMid)
 			writeExcel(df,nvMid)
+
+	if sellerCrawling :
+		df = readJson(keyword)
+		nvMids = list(df['nvMid'])
+		global cur_nvMid
+
+		for nvMid in nvMids:
+			total_sellers = []
+			path3 = './{}_seller.json'.format(nvMid)
+			print(path3)
+			cur_nvMid=nvMid
+			sellerIndex = int(getSellerIndex(cur_nvMid))
+			seller_index_list = [i for i in range(1,sellerIndex+1)]
+			with Pool(processes=workers) as pool:
+				sellerInfos = pool.map(multiprocessing_seller_crawl,seller_index_list)
+				for sellerInfo in sellerInfos:
+					total_sellers+=sellerInfo
+			print(total_sellers)
 
 if __name__=='__main__':
 	main()
