@@ -187,7 +187,8 @@ def getSellerInfo(tbl):
 
 	seller=tbl.select('td > a')[0]['data-mall-name']
 	date=tbl.select('td.td_price > a')[0]['data-rcv-date'].replace('.','/')[:-1]
-	subject = tbl.select('p')[0].text
+	subject = tbl.select('')
+	print(subject)
 	atc = tbl.select('div.atc')[0].text
 	shippingFee =''
 	return {'seller':seller,
@@ -202,7 +203,7 @@ def sellerParse(htmlDoc):
 	priceDiffs = result.find('div',{'class':'price_diff_lst'})
 	tbls = priceDiffs.findAll('table', {'class': 'tbl tbl_v'})
 
-	#print(tbls)
+
 	sellersInfo =[]
 	for tbl in tbls:
 		sellerInfo = getSellerInfo(tbl)
