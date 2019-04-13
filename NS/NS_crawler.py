@@ -226,18 +226,23 @@ def main():
 	global keyword
 	keyword = args.k
 
-	itemListCrawling = True
+	itemListCrawling = False
 	reviewCrawling = True
 	sellerCrawling = False
 	workers = 4
+	base_path= './data'
+	path1 = os.path.join(base_path,'{}_items'.format(keyword))
+	if not os.path.exists(base_path):
+		os.mkdir(base_path)
+	else :
+		pass
 
 	# itemListCrawling : 검색 -> 아이템 리스트 크롤링
 	# reviewCrawling : 아이템 리스트가 저장되어있는 json파일을 읽어서
 	# 해당 url을 크롤링하여 각 id별 리뷰데이터를 크롤링
 
 	if itemListCrawling :
-		index = 10   # 80 * index 의 개수만큼 search
-		path1 = './{}_items.json'.format(keyword)
+		index = 1   # 80 * index 의 개수만큼 search
 		total_products = []
 
 		num_list= [i for i in range(1,index+1)]
@@ -247,20 +252,21 @@ def main():
 			for product in products :
 				total_products+=product
 
-		file = open(path1,'w+')
+		file = open(path1+'.json','w+')
 		file.write(json.dumps(total_products))
 		file.close()
-		df=readJson('{}_items'.format(keyword))
-		writeExcel(df,'{}_items'.format(keyword))
+		df=readJson(path1)
+		writeExcel(df,path1)
 
 	if reviewCrawling :
-		df = readJson('{}_items'.format(keyword))
+
+		df = readJson(path1)
 		nvMids = list(df['nvMid'])
 		global current_nvMid
 
 		for nvMid in nvMids:
 			total_reviews = []
-			path2 = './{}_reviews.json'.format(nvMid)
+			path2 = os.path.join(base_path,'{}_reviews'.format(nvMid))
 			print(path2)
 			current_nvMid=nvMid
 			reviewIndex=int(getReviewIndex(current_nvMid))
@@ -271,11 +277,11 @@ def main():
 					total_reviews+=reviewInfo
 
 			print(total_reviews)
-			file = open(path2,'w+')
+			file = open(path2+'.json','w+')
 			file.write(json.dumps(total_reviews))
 			file.close()
-			df=readJson('{}_reviews'.format(nvMid))
-			writeExcel(df,'{}_reviews'.format(nvMid))
+			#df=readJson(path2)
+			#writeExcel(df,path2)
 
 	if sellerCrawling :
 		df = readJson(keyword)
@@ -284,7 +290,7 @@ def main():
 
 		for nvMid in nvMids:
 			total_sellers = []
-			path3 = './{}_sellers.json'.format(nvMid)
+			path3 = os.path.join(base_path,'./{}_sellers'.format(nvMid))
 			print(path3)
 			cur_nvMid=nvMid
 			sellerIndex = int(getSellerIndex(cur_nvMid))
