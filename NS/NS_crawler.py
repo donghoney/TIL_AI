@@ -219,16 +219,16 @@ def multiprocessing_seller_crawl(i):
 
 def main():
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--k',type=str,default='설화수',
+	parser.add_argument('--k',type=str,default='스킨케어',
 						help='what is the keyword for searching')
 	args = parser.parse_args()
 
 	global keyword
 	keyword = args.k
 
-	itemListCrawling = False
-	reviewCrawling = False
-	sellerCrawling = True
+	itemListCrawling = True
+	reviewCrawling = True
+	sellerCrawling = False
 	workers = 4
 
 	# itemListCrawling : 검색 -> 아이템 리스트 크롤링
@@ -236,8 +236,8 @@ def main():
 	# 해당 url을 크롤링하여 각 id별 리뷰데이터를 크롤링
 
 	if itemListCrawling :
-		index = 20   # 80 * index 의 개수만큼 search
-		path1 = './{}.json'.format(keyword)
+		index = 10   # 80 * index 의 개수만큼 search
+		path1 = './{}_items.json'.format(keyword)
 		total_products = []
 
 		num_list= [i for i in range(1,index+1)]
@@ -250,15 +250,17 @@ def main():
 		file = open(path1,'w+')
 		file.write(json.dumps(total_products))
 		file.close()
+		df=readJson('{}_items'.format(keyword))
+		writeExcel(df,'{}_items'.format(keyword))
 
 	if reviewCrawling :
-		df = readJson(keyword)
+		df = readJson('{}_items'.format(keyword))
 		nvMids = list(df['nvMid'])
 		global current_nvMid
 
 		for nvMid in nvMids:
 			total_reviews = []
-			path2 = './{}_review.json'.format(nvMid)
+			path2 = './{}_reviews.json'.format(nvMid)
 			print(path2)
 			current_nvMid=nvMid
 			reviewIndex=int(getReviewIndex(current_nvMid))
@@ -272,8 +274,8 @@ def main():
 			file = open(path2,'w+')
 			file.write(json.dumps(total_reviews))
 			file.close()
-			df=readJson(nvMid)
-			writeExcel(df,nvMid)
+			df=readJson('{}_reviews'.format(nvMid))
+			writeExcel(df,'{}_reviews'.format(nvMid))
 
 	if sellerCrawling :
 		df = readJson(keyword)
@@ -282,7 +284,7 @@ def main():
 
 		for nvMid in nvMids:
 			total_sellers = []
-			path3 = './{}_seller.json'.format(nvMid)
+			path3 = './{}_sellers.json'.format(nvMid)
 			print(path3)
 			cur_nvMid=nvMid
 			sellerIndex = int(getSellerIndex(cur_nvMid))
