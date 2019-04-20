@@ -227,7 +227,7 @@ def main():
 	keyword = args.k
 
 	itemListCrawling = False
-	reviewCrawling = True
+	reviewCrawling = False
 	sellerCrawling = False
 	workers = 4
 	base_path= './data'
@@ -300,7 +300,8 @@ def main():
 				for sellerInfo in sellerInfos:
 					total_sellers+=sellerInfo
 			print(total_sellers)
-
+	df=readJson('./data/18381967244_reviews')
+	writeExcel(df,'./data/18381967244_reviews')
 if __name__=='__main__':
 	main()
 
