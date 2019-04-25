@@ -103,7 +103,7 @@ def main():
     # 사건번호 크롤링 코드 작성해야함. 테이블에서 사건번호 리스트 크롤링하기
     # http://search.ccourt.go.kr/ths/pr/selectThsPr0101List.do 들어가서 post headers 확인하여 작성
 
-    htmlDoc=crawl('2019헌사66')
+    htmlDoc=crawl('2019헌아142')
     resultDict=parse(htmlDoc)
     for key,value in resultDict.items():
         print('key : {} , value : {}'.format(key,value))
