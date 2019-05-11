@@ -102,8 +102,8 @@ def stock_eval():
     #상장된 날짜가 코스피200 종목 평균보다 작은 종목 리스트에서 제거
     KS200_list=short_item_remove(data_path, KS200_list)
 
-    start = '20150102'
-    end = '20180601'
+    start = '20170102'
+    end = '20190101'
 
 
     h1_list = []
