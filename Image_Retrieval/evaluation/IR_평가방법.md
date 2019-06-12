@@ -6,7 +6,7 @@ By glee1228@naver.com
 
 5k Dataset Download Link : [http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)
 
-1. 데이터셋 구성(train, test)
+1. 데이터셋 구성(train)
 
 루트 디렉토리 이름 : oxbuild_images
 
@@ -28,7 +28,7 @@ By glee1228@naver.com
   * Ashmolean_Oxford(196 pics)
   * Worcester_Oxford(71 pics)
 
-* test(1503 pics)
+* 레이블 없는1503 pics
 
 
 
