@@ -37,3 +37,12 @@
 * 커스텀 클래스: dontcare, dog
 * 그룹 이름: MS-COCO 
 * 데이터 세트 이름: coco-dog
+
+
+
+### 6/13 IVA Session
+
+* Event Code : KRAI_IVA_TA28
+* 비디오 어노테이션 툴 : Vatic 
+* 
+
