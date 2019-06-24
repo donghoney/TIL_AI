@@ -44,5 +44,10 @@
 
 * Event Code : KRAI_IVA_TA28
 * 비디오 어노테이션 툴 : Vatic 
-* 
+
+
+
+### 6/21 Accelerating Applications with CUDA C/C++ Session
+
+* Event Code : KRAI_CUDA_TA45
 
