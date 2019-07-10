@@ -257,7 +257,7 @@ X' = AX 인 행렬 A는 X에서 X'로의 선형 변환이다. 이렇게 homogene
 
 ### 3. Affine Transformation
 
-Affine 변환은 직선, 길이(거리)의 비, 평행성을 보존하는 변환이며 그 일반식은 다음과 같다.
+Affine 변환은 직선, 길이(거리)의 비, 평행성(parallelism)을 보존하는 변환이며 그 일반식은 다음과 같다.
 
 - 크기, shearing, 반전(reflection), 회전, 평행이동 변환
 
@@ -266,7 +266,7 @@ $$
 x' \\ y'
 \end{bmatrix} =
 \begin{bmatrix}
-a & -b \\ b & a
+a & b \\ c & d
 \end{bmatrix} \begin{bmatrix}
 x \\ y
 \end{bmatrix} + \begin{bmatrix}
@@ -280,7 +280,7 @@ $$
 x' \\ y' \\ 1
 \end{bmatrix} =
 \begin{bmatrix}
-a & -b & e\\ b & a & f\\0 & 0 & 1
+a & b & e\\ c & d & f\\0 & 0 & 1
 \end{bmatrix} \begin{bmatrix}
 x \\ y \\ 1
 \end{bmatrix}
@@ -289,5 +289,179 @@ $$
 
 Affine 변환의 자유도는 6이고, 따라서 3개의 매칭쌍이 있으면 affine 변환을 유일하게 결정할 수 있다.
 
-**질문 사항 : 여기서 말하는 자유도가 정확히 어떤 개념인지 궁금하다.**
+----
+
+**질문 사항 : 여기서 말하는 자유도란? 3개의 매칭쌍이 필요한 이유는? **
+
+답 :
+
+----
+
+
+
+임의의 세 점을 매칭시키는 affine 변환은 다음과 같이 계산할 수 있다.
+$$
+\begin{bmatrix}
+x_1 & - y_1 & 0 & 0 & 1 & 0\\
+0 & 0 & y_1 & x_1 & 0 & 1 \\
+x_2 & - y_2 & 0 & 0& 1 & 0\\
+0 & 0 & y_2 & x_2 & 0 & 1\\ 
+x_3 & - y_3 & 0 & 0& 1 & 0\\
+0 & 0 & y_3 & x_3 & 0 & 1\\ 
+
+\end{bmatrix} \begin{bmatrix}
+a \\ b \\ c \\ d \\ e \\ f
+\end{bmatrix} =
+\begin{bmatrix}
+x_1' \\ y_1' \\
+x_2' \\ y_2' \\ 
+x_3' \\ y_3' \\ 
+
+\end{bmatrix}
+$$
+매칭 쌍이 3개 이상인 경우에는 pseudo inverse를 이용하여 affine 변환을 구할 수 있다.
+
+**'2D 평면에서의 affine 변환을 직관적으로 이해하는 한 방법은 임의의 삼각형을 임의의 삼각형으로 매핑시킬 수 있는 변환이 affine이다'** (단, 평행성을 보존하면서) 라고 이해하는 것이다.
+
+![img](https://t1.daumcdn.net/cfile/tistory/2341B64B51D9653719)
+
+평행성을 보존한다는 의미는 위처럼 **$$p_1,p_2,p_3$$을 갖고 $$p_1',p_2',p_3'$$ 을 매팽시키는 affine 변환을 구했을 때, 이 변환을 갖고 $$p_4$$ 를 매핑시키면 오른쪽 그림처럼 평행하게 $$p_4'$$ 가 나와야 한다**는 의미이다.
+
+
+$$
+X' = AX+B 이면, \\
+p_1' = Ap_1+B
+\ ,p_2' = Ap_2+B ,...을\ 만족한다. \\
+벡터\ p1p4 = p1p2 + p1p3이므로\ p4 = p2+p3 - p1이 된다. \\
+마찬가지로, p_4' = p_2' + p_3' -p_1'으로\ 매핑이\ 된다는\ 것이다.
+$$
+
+
+### 4. Homography(Projective Transformation)
+
+planer surface 물체의 경우에는 3D 공간에서의 2D 이미지로의 임의의 원근투영변환(perspective projective transformation)을 두 이미지 사이의 homography로 모델링 할 수 있다. 즉, 어떤 planer surface가 서로 다른 카메라 위치에 대해 이미지 A와 이미지 B로 투영되었다면 이미지 A와 이미지 B의 관계를 homography로 표현할 수 있다는 것이다. 그래서 homography를 planer homography라고도 부르며, homography는 평면 물체의 2D 이미지 변환관계를 설명할 수 있는 가장 일반적인 모델이다. 또한 homography는 projective transformation(투영 변환)과 같은 말이다.
+
+Homography는 homogeneous 좌표계에서 정의되며 일반식은 다음과 같다.
+$$
+w\begin{bmatrix}
+x' \\ y' \\ 1
+\end{bmatrix} =
+\begin{bmatrix}
+h_{11} & h_{12} & h_{13} \\
+h_{21} & h_{22} & h_{23} \\
+h_{31} & h_{32} & h_{33} 
+\end{bmatrix} \begin{bmatrix}
+x \\ y \\ 1
+\end{bmatrix}
+$$
+
+
+Homography는 자유도가 8이며, 따라서 homography를 결정하기 위해서는 최소 4개의 매칭쌍을 필요로 한다. Homography의 자유도가 9가 아니라 8인 이유는 (x,y,1), (wx',wy',w)이 homogeneous 좌표이므로 homography의 scale을 결정할 수 없기 때문이다.
+
+ **(∵ homography 변환 X'=HX에서 X, X'은 homogeneous 좌표이기 때문에 X'=kHX도 성립하게 됩니다. 즉, H가 homography 행렬이라면 임의의 0이 아닌 k에 대해 kH도 또한 동일한 homography 행렬이 됩니다).**
+
+
+
+Homography를 직관적으로 이해하기 위한 한 좋은 방법은 **2D 평면에서 임의의 사각형을 임의의 사각형으로 매핑시킬 수 있는 변환이 homography다** 라고 생각하는 것이다. 물론 사각형이 뒤집혀질 수도 있다.
+
+![img](https://t1.daumcdn.net/cfile/tistory/0249524A51DA3A991D)
+
+
+
+
+
+**각각의 변환들을 보여주는 이미지**
+
+![img](http://i.stack.imgur.com/3pSz0.png)
+
+
+
+### OpenCV의 2D 변환 관련 함수
+
+**estimateRigidTransform**
+
+Computes an optimal affine transformation between two 2D point sets.
+
+다수의 매칭쌍으로부터  similarity 변환이나 affine 변환을 구할 때 사용 (파라미터로 선택 가능). 내부적으로 RANSAC을 이용. 
+
+- **Python:**` cv2.estimateRigidTransform`(src, dst, fullAffine) → retval
+- Parameters:
+  - **src** – First input 2D point set stored in `std::vector` or `Mat`, or an image stored in `Mat`.
+  - **dst** – Second input 2D point set of the same size and the same type as `A`, or another image.
+  - **fullAffine** – If true, the function finds an optimal affine transformation with no additional restrictions (6 degrees of freedom). Otherwise, the class of transformations to choose from is limited to combinations of translation, rotation, and uniform scaling (5 degrees of freedom).
+
+**getAffineTransform**
+
+Calculates an affine transform from three pairs of the corresponding points.
+
+3쌍의 입력 매칭쌍으로부터 affine 변환을 구해줌.
+
+- **Python:**` cv2.getAffineTransform`(src, dst) → retval
+
+- Parameters:
+  - **src** – Coordinates of triangle vertices in the source image.
+  - **dst** – Coordinates of the corresponding triangle vertices in the destination image.
+
+
+
+**invertAffineTransform**
+
+Inverts an affine transformation.
+
+affine 변환의 역변환을 구해줌
+
+- **Python:**` cv2.invertAffineTransform`(M[, iM]) → iM
+
+- Parameters:
+
+  - **M** – Original affine transformation.
+  - **iM** – Output reverse affine transformation.
+
+  
+
+**getPerspectiveTransform**
+
+Calculates a perspective transform from four pairs of the corresponding points.
+
+4쌍의 입력 매칭쌍으로부터 homography 행렬을 계산해 줌
+
+- **Python:**` cv2.getPerspectiveTransform`(src, dst) → retval
+- Parameters:
+  - **src** – Coordinates of quadrangle vertices in the source image.
+  - **dst** – Coordinates of the corresponding quadrangle vertices in the destination image.
+
+
+
+**findHomography**
+
+Finds a perspective transformation between two planes.
+
+다수의 매칭쌍으로부터 homography 행렬을 계산해 줌 (근사 방법은 전체 데이터 fitting, RANSAC, LMedS 중 선택)
+
+- **Python:**` cv2.findHomography`(srcPoints, dstPoints[, method[, ransacReprojThreshold[, mask]]]) → retval, mask
+- Parameters:
+  - **srcPoints** – Coordinates of the points in the original plane, a matrix of the type `CV_32FC2` or `vector<Point2f>` .
+  - **dstPoints** – Coordinates of the points in the target plane, a matrix of the type `CV_32FC2` or a `vector<Point2f>` .
+  - **method** –Method used to computed a homography matrix. The following methods are possible:**0** - a regular method using all the points
+  - **RANSAC** - RANSAC-based robust method
+  - **LMEDS** - Least-Median robust method
+  - **ransacReprojThreshold** –Maximum allowed reprojection error to treat a point pair as an inlier (used in the RANSAC method only). That is, if![\| \texttt{dstPoints} _i -  \texttt{convertPointsHomogeneous} ( \texttt{H} * \texttt{srcPoints} _i) \|  >  \texttt{ransacReprojThreshold}](https://docs.opencv.org/3.0-beta/_images/math/4fcf0dae391d53967cd8d8f3284d7d6fdd5937b4.png)then the point ![i](https://docs.opencv.org/3.0-beta/_images/math/881d48e575544c8daaa1d83893dcde5f9f7562ec.png) is considered an outlier. If `srcPoints` and`dstPoints` are measured in pixels, it usually makes sense to set this parameter somewhere in the range of 1 to 10.
+  - **mask** – Optional output mask set by a robust method ( `RANSAC` or `LMEDS` ). Note that the input mask values are ignored.
+  - **maxIters** – The maximum number of RANSAC iterations, 2000 is the maximum it can be.
+  - **confidence** – Confidence level, between 0 and 1.
+
+**perspectiveTransform**
+
+Performs the perspective matrix transformation of vectors.
+
+3x3 homography 변환행렬 또는 4×4 변환행렬을 이용하여 좌표변환을 할 때 사용
+
+- **Python:**` cv2.perspectiveTransform`(src, m[, dst]) → dst
+
+- Parameters:
+  - **src** – input two-channel or three-channel floating-point array; each element is a 2D/3D vector to be transformed.
+  - **dst** – output array of the same size and type as `src`.
+  - **m** – `3x3` or `4x4` floating-point transformation matrix.
+
+
 
