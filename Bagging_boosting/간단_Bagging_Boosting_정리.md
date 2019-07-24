@@ -10,7 +10,7 @@ glee1228@naver.com
 
 1. Bagging은 병렬적이며 빠르고, Boosting은 직렬적이며 상대적으로 느리다.
 2. Bagging은 모델의 Variance를 줄일 수 있으나, Bias는 줄이지 못한다
-3. Boosting은 Variance와 Bias 모두를 줄일 수 있다.
+3. Boosting은 Variance와 Bias 모두를 줄일 수 있다. Bias를 줄이는데 목적이 있다.
 
 #### Bias와 Variance와의 관계
 
@@ -79,7 +79,9 @@ bootstrapping : 랜덤 샘플링을 통해 Training Data를 늘리는 방법
 
 **Boosting의 이해**
 
-1. 첫번째 모델이 기본 데이터셋을 그대로 학습을 한다. 
+Boosting은 Bagging에서 해결하지 못한 문제(못 맞추는 문제는 여전히 못 맞추는 문제) - 높은 Bias 를 해결하지 위한 방법으로 여러 개의 모델이 순차적으로 생성되어서 다음 모델을 만들 때 마다 앞에 모델에서 잘 분류하지 못했던 데이터를 분류 할 수 있도록 데이터 혹은 가중치를 그 다음 모델에 반영해서 계속 모델을 추가해 가는 방식이다.
+
+1. 첫번째 모델이 기본 데이터셋을 그대로 또는 일부 데이터를 Bagging하여 학습을 한다. 
 
 2. 그 다음 두 번째 모델은 전체 데이터를 학습하되 첫번째 모델이 에러를 일으킨 데이터에 더 큰 중점을 두고 학습을 진행한다. 
 
@@ -89,9 +91,17 @@ bootstrapping : 랜덤 샘플링을 통해 Training Data를 늘리는 방법
 
 * 앞 모델의 학습이 끝나야 뒷 모델이 그 결과에 기반하여 가중치를 결정하고 학습을 할 수 있기 때문에 순차적으로 학습해야 한다. 직렬적이고 상대적으로 속도가 느리다.
 
+* 대표적인 알고리즘으로 Adaboost, Gradient Boost,Xgboost 가 있다.
 
 
-**Bagging, Boosting과 Bias, Variance** 
+
+**Adaboost**
+
+
+
+****
+
+#### **Bagging, Boosting과 Bias, Variance** 
 
 -**bagging**은 데이터셋을 선별적으로 학습한다, 하지만 여전히 각각의 모델은 모든 data를 동등하게 대한다. 때문에 **못알아보던 data를 알아보게 되지는 않는다**. 다만 여러개의 모델의 평균을 통해 최종결과를 얻기 때문에 그 결과가 **안정적**이다. 
 
