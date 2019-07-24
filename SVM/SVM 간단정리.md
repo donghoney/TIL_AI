@@ -4,91 +4,122 @@ glee1228@naver.com
 
 
 
-**회귀(regression)**
+**SVM 의 Algorithm**
 
-* **연속** 변수를 예측
-* 데이터를 지나는 **추세선**을 찾는 것
+![ê´ë ¨ ì´ë¯¸ì§](https://1.bp.blogspot.com/-K8qVBF8FKpk/WVnU0CDKPzI/AAAAAAAABy4/X-otWS8WuickSKOu0JNEjergkePulalZQCLcBGAs/s1600/Capture.PNG)
+
+**순서** 
+
+1. **두 가지 케이스 나누기(positive, negative)**
+
+   > 위의 그림에서 초록색 점들은 positive 케이스이고 빨간 점들이 negative 케이스라고 하자. 초록색 점선은 positive를 나누는 경계 결정이 되고, 빨간색 점선은 negative를 분류하는 경계 결정이라고 하고 다음과 같은 식으로 표현해보자.
+
+   $$
+   Positive\ Case\ \ \ \ \ \ \ =\ \ \ \ \ \ \ w \cdot x +b \ge 1\\
+   Negative\ Case\ \ \ \ \ \ \ =\ \ \ \ \ \ \ w \cdot x +b \le -1
+   $$
+
+2. **변수 y를 곱해주어 조건식을 표현**
+
+   > 상태 변수 y 를 양수 음수로 나누어 전체 결정 경계의 식이 양수의 값이 되도록 표현한다.
+
+   $$
+   y_j
+   \begin{cases}
+   +1, & \mbox{if }\ w \cdot x +b\ge \mbox{ 1} \\
+   -1, & \mbox{if }\ w \cdot x +b\le \mbox{ -1}
+   \end{cases}\\
+   
+   Confidence\ Level\ \ \ \ \ \ =\ \ \ \ \ \ \ (w \cdot x +b)y_j\\
+   $$
+
+3. **Distance(Margin) 최대화**
+
+   >두 결정 경계의 사이 거리가 최대화 되도록 하기에 앞서, 벡터 두개를 정의하고 두개의 벡터를 통해 
+   >
+   > Decision Rule을 우선 정의하면, 다음과 같다.
+
+   
+
+   $$\bar w$$ :결정 경계선의 법선 벡터
+
+   $$\bar u$$ : $$positive, negative$$ 결정 경계선 위의 $$x_+$$와 $$x_-$$ 의 벡터
+   $$
+   \bar w \cdot \bar u \ge C\\
+   C = -b
+   $$
+   positive의 경우에서, 
+   $$
+   f(x) = w \cdot x +b \ge 0
+   $$
+   으로 표현할 수 있다.
+
+   $$Positive\ Case\ \ \ \ \ \ \ =\ \ \ \ \ \ \ w \cdot x_+ = 1-b\\
+   Negative\ Case\ \ \ \ \ \ \ =\ \ \ \ \ \ \ w \cdot x_- = -1 -b$$
+
+   이므로,
+
+   이제 Margin의 Distance 즉, WIDTH는 $$(x_+ - x_-) \cdot \frac{\bar w}{\lVert w \rVert}$$ 로 구할 수 있다.
+
+   그러므로 
+   $$
+   WIDTH = \frac{2}{\lVert w \rVert}
+   $$
+   이 된다.
+
+   $$Maximize \frac{1}{\lVert w \rVert} \rightarrow Minimize\ \|w\| \rightarrow Minimize \ \frac{1}{2} \|w\|^2$$ 
 
 
 
-**분류(classification)**
+4. **라그랑주 승수법으로 정의하고 극값을 찾는다**
 
-* **이산** 변수 또는 **범주**형 변수를 예측
-* 데이터를 나누는 **경계선**을 찾는 것
+   >Loss를 라그랑주 승수법으로 정의하고 미분하여 극댓값 또는 극솟값을 찾는다.
+   >
+   >w에 대해 편미분 한 값이 0이 될 경우와 b에 대해 편미분한 값이 0이 될 경우를 구해 식에 대입한다.
 
-주의) 로지스틱 회귀분석 = 분류
+$$
+L = \frac{1}{2}\|\bar w\|^2 - \sum_i^N \alpha_i\left[ y_i(\bar w \cdot \bar x +b)-1 \right]
+$$
 
+$$
+\alpha_i = 라그랑주\ 승수(0이\ 아닌\ 다른 수)
+$$
 
+$$
+\bar w = \sum_i \alpha_i \cdot y_i \cdot \bar x_i\\
+\sum_i \alpha_iy_i =0\\
+L = \frac{1}{2}(\sum_i \alpha_i \cdot y_i \cdot \bar x_i)(\sum_j \alpha_j \cdot y_j \cdot \bar x_j)-\sum_i \alpha_i \cdot y_i \cdot \bar x_i\cdot(\sum_j \alpha_j \cdot y_j \cdot \bar x_j) - \sum_i \alpha_i \cdot y_i \cdot b + \sum_i \alpha_i\\
+L = \sum\alpha_i -\frac{1}{2}\sum_i\sum_j\alpha_i\alpha_jy_iy_jx_i\cdot x_j
+$$
 
-**SVM(Support Vector Machine)**
+> 여기서 최종적으로 알 수 있는 것은 Margin은 x+와 x-의 내적값에 따라서만 바뀐다.
+>
+> 그러므로 여기서 Loss를 최대화할 수 있는 방법은 변환시킨 벡터와 다른 벡터의 내적값이다.
 
-* 선형 모형: 오차를 줄이는 데 관심
-* SVM: 좋은 형태를 찾는데 관심
+5. **Kernel 변환**
 
+>벡터와 다른 벡터의 내적값을 늘이기 위해 다른 차원의 내적값을 알기 위해 Kernel함수를 이용하는데, 
+>
+>종류는 Linear Kernel, RBF Kernel(Gaussian Kernel) , Polynomial Kernel이 있다.
 
+$$
+\Phi(\bar x_i)\cdot\Phi(\bar x_j)\ to \ maximize\\
+K(x_i,x_j) = \Phi(\bar x_i)\cdot\Phi(\bar x_j)
+$$
 
-**SVM과 linear model과의 관계**
-
-* 정규화 선형 모형 -> 오차를 줄이기 + 좋은 형태도 찾기
-* SVM -> 좋은 형태+ 오차도 줄이기
-* SVM은 Ridge 선형 모형과 비슷함
-
-
-
-**SVM 결정경계는 어떻게 결정하는가**
-
-* 가중치 벡터(W)에 직교하면서, margin이 최대가 되는 선형을 찾음.
-
-![svm decision boundaryì ëí ì´ë¯¸ì§ ê²ìê²°ê³¼](https://www.researchgate.net/profile/Doris_Pischedda/publication/301780242/figure/fig2/AS:576318501015556@1514416446139/Illustration-of-the-decision-boundary-of-the-linear-SVM-in-the-simplest-case-with-only.png)
-
-* $$W^TX+b = 0$$ 의 수식을 따르는 선형을 결정경계(Decision Boundary)라고 함.
-* 또한 가중치 벡터 W는 결정경계(Decision Boundary)와 직교(90도)해야 한다.
-
-
-
-**왜 W와 결정경계는 직교해야 하는가**
-
-* 계산상의 편의를 위해, b=0으로 가정하면, $$W^TX=0$$ 을 결정 경계로 정의할 수 있고 2개의 벡터 내적의 결과가 0이 되는 각도는 90이므로 직교한다고 표현함
-
-
-
-**Margin 계산 방식**
-
-* 결정 경계와 가장 가까운 point를 $$x^1, x^2$$ 로 가정하면, (b=0으로 가정)
-
-* $$W^TX^1 = -1, \ W^TX^2= 1$$ 
-
-* $$
-  m =W^TX^2 - W^TX^1\\ = \frac{	\left| 1 \right|}{	\left| W \right|}+\frac{	\left| -1 \right|}{	\left| W \right|} \\ =\frac{	\left| 2 \right|}{	\left| W \right|}
+* Linear Kernel
+  $$
+  변환된 \ 내적 \ 값 = (\bar u \cdot \bar v +1)^n
   $$
 
-* ![ì ê³¼ ì§ì  ì¬ì´ì ê±°ë¦¬ì ëí ì´ë¯¸ì§ ê²ìê²°ê³¼](http://cfs14.tistory.com/upload_control/download.blog?fhandle=YmxvZzIzNzk5QGZzMTQudGlzdG9yeS5jb206L2F0dGFjaC8wLzEwMDAwMDAwMDA1NC5wbmc%3D)
-
-* 직선($$ax+by+c =0$$)과 점($$x_1,y_1$$) 사이의 거리 공식
-
-* $$
-  d = \frac{	\left| ax_1+by_1+c \right|}{	\left|  \sqrt{a^2+b^2} \right|}
+* Gaussian Kernel
+  $$
+  변환된 \ 내적 \ 값 = e^{-\frac{\|x_i-x_j\|}{\sigma}}
   $$
 
-* $$W^TX=0와 \ X^1과의 \ 거리는 \Rightarrow \frac{	\left| W^TX^1 \right|}{	\left|  \sqrt{W^2} \right|}$$
+6. ****
 
-* $$W^TX=0와 \ X^2과의 \ 거리는 \Rightarrow \frac{	\left| W^TX^2 \right|}{	\left|  \sqrt{W^2} \right|}$$
-
-**Support Vector Regression(SVR)**
-
-* SVM의 회귀 버전
-* 가능한 평평한 형태의 추세선을 찾음
-
-
-
-**Support Vector Classification(SVC)**
-
-* SVM의 분류 버전
-* 클래스가 잘 나뉘는 결정 경계를 찾음
-
-
-
-**Caution **
+**사용시 주의사항 **
 
 * SVM은 특성의 스케일에 민감함 -> 축에 따른 데이터 분포에 따라서 결정 경계의 기울기가 달라지기 때문에 사이킷런의 StandardScaler를 사용하여 특성의 스케일을 조정하면 성능이 향상됨
 
@@ -145,14 +176,3 @@ glee1228@naver.com
 $$
 L(x,\lambda_1,\lambda_2,...,\lambda_N) = f(x) - \sum_{i=1}^N{\lambda_i g_i(x)}
 $$
-
-
-**[질문]** 가우시안 커널을 사용한 SVM 분류기에서, 다음과 같이 결정경계를 정할 경우에
-
-![image-20190723145109460](/Users/donghoon/Library/Application Support/typora-user-images/image-20190723145109460.png)
-
-데이터셋에 underfitting 이라고 생각되는데, 
-
-1. $$C$$의 값을 올려야 할지 줄여야 할지?
-
-2. 그리고 $$\sigma^2$$ 를 올려야할지 줄여야할지?
