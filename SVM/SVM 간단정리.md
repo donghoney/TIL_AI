@@ -2,7 +2,9 @@
 
 glee1228@naver.com
 
+**SVM**
 
+입력 데이터 벡터를 고차원 공간에 매핑함으로써 positive class와 negative class 사이의 마진(Margin)을 최대화 하는 결정 경계(Decision Boundary)를 찾는 분류 알고리즘
 
 **SVM 의 Algorithm**
 
@@ -96,7 +98,19 @@ $$
 >
 > 그러므로 여기서 Loss를 최대화할 수 있는 방법은 변환시킨 벡터와 다른 벡터의 내적값이다.
 
-5. **Kernel 변환**
+5. **hinge Loss로의 표현**
+
+>positive와 negative의 범주를 구분하면서 데이터와의 거리가 가장 먼 결정경계를 찾기 위해 hinge loss를 사용한다. 위의 y값은 positive일 경우 +1의 값을 갖고, negative일 경우 -1의 값을 가진다고 했는데, 여기서 y는 true값이 되고 wx+b-1과 wx+b+1의 값이 pred 값이 되어 손실함수가 정의된다
+>
+>y'*y의 값은 위에서 confidence level 로 언제나 양수 값을 취하도록 정의했으므로 loss 그래프는 아래와 같이 그려질 수 있다.
+
+$$
+loss = max \{ \ 0,1-(y'*y)\ \}
+$$
+
+![img](https://i.imgur.com/J59cih1.png)
+
+6. **Kernel 변환**
 
 >벡터와 다른 벡터의 내적값을 늘이기 위해 다른 차원의 내적값을 알기 위해 Kernel함수를 이용하는데, 
 >
