@@ -97,6 +97,20 @@ Boosting은 Bagging에서 해결하지 못한 문제(못 맞추는 문제는 여
 
 **Adaboost**
 
+> Adaptive + Boosting 의 약자로 간단한 약 분류기(weak classifier)들이 상호보완하도록 단계적(순차적)으로 학습, 이들을 조합하여 최종 강 분류기(Strong classifier)의 성능을 증폭시킨다.
+>
+> 약 분류기(weak classifier)들을 한 번에 하나씩 순차적으로 학습시킬 때, 먼저 학습된 분류기가 잘못 분류한 결과 정보를 다음 분류기의 학습 시 사용하여 이전 분류기의 단점을 보완하도록 한다.
+>
+> 즉, 이전 분류기가 오분류한 샘플의 가중치를 adaptive하게 바꾸어가며 잘 못 분류되는 데이터에 더 집중하여 잘 학습하고 분류할 수 있도록 한다.
+>
+> 
+
+**Adaboost 알고리즘으로 영상에 관심있는 물체를 검출하는 classifier를 만드는 과정**
+
+![img](https://mblogthumb-phinf.pstatic.net/MjAxNzA0MTJfNjYg/MDAxNDkxOTg3MzE2NTEx.gAwXXAUqr0NHz1nqNPipkIFF0-ZY2C2GyQXqFUM3E04g.5Twv-UUVGoWvw_uOrOh3o817bgsKxxZ0FcAFcMBUB4wg.JPEG.dic1224/adaboost1.png?type=w2)
+
+
+
 
 
 ****
