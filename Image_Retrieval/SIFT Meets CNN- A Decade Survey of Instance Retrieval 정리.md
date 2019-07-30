@@ -43,7 +43,7 @@ BoW는 원래 텍스트를 단어로 파싱하기 때문에 문서를 모델링�
 최근 몇 년 동안, SIFT 기반 모델의 인기는 많은 비전 작업에서 손으로 만들어진 features을 능가하는 것으로 보인 계층적 구조 인 CNN (convolutional neural network)에 의해 압도되었습니다.
 검색에서, CNN 벡터가 짧은 경우에도 BoW 모델에 비해 경쟁력있는 성능이 보고 되었습니다 [10, 16, 17].
 
-![Fig. 1: Milestones [5], [6], [7], [8], [9], [10], [11], [12], [13], [14] of BoW based image retrieval. Times for BoW models based on SIFT or CNN features are covered in blue and red, respectively, marked by the pioneering work of Krizhevsky et al. [8].](https://ai2-s2-public.s3.amazonaws.com/figures/2017-08-08/6d902439b736a7546dd8872b307fb760087ca629/2-Figure1-1.png)
+![Fig. 1: Milestones [5], [6], [7], [8], [9], [10], [11], [12], [13], [14] of BoW based image retrieval. Times for BoW models based on SIFT or CNN features are covered in blue and red, respectively, marked by the pioneering work of Krizhevsky et al. [8].](https://user-images.githubusercontent.com/26589942/62159301-4ea78a80-b34c-11e9-8e86-b7f181f081d3.png)
 
 CNN 기반 검색 모델은 일반적으로 압축 표현을 계산하고 유클리드 거리 또는 일부 근사 이웃 (ANN) 검색 방법을 검색에 사용합니다. 현재 문헌은 사전 훈련 된 CNN 모델을 직접 사용하거나 특정 검색 작업을 위해 미세 조정(fine-tunning)을 수행 할 수 있습니다.
 이러한 방법의 대부분은 descriptor를 얻기 위해 이미지를 네트워크로 한 번만 보냅니다(feed).
@@ -66,7 +66,7 @@ SIFT 기반의 방법은 대형, 중형 또는 소형 코드북(large, medium-si
 CNN 기반의 방법은 하이브리드 방법뿐만 아니라 사전 훈련 된 또는 미세 조정 된 CNN 모델을 사용하여 분류됩니다.
 이들의 유사점과 차이점은 표 1에 요약되어 있습니다.
 
-![image-20190731023924478](/Users/donghoon/Library/Application Support/typora-user-images/image-20190731023924478.png)
+![image-20190731023924478](https://user-images.githubusercontent.com/26589942/62159354-75fe5780-b34c-11e9-98fd-653ab66e8519.png)
 
 SIFT 기반의 방법은 2012 년 이전에 주로 연구되었다 (좋은 연구가 최근 몇 년 간 등장한다) [18].
 이 방법의 라인은 일반적으로 하나의 타입의 검출기, 예를 들어 Hessian-Affine 및 하나의 타입의 디스크립터 (예를 들어, SIFT)를 사용한다.
@@ -106,7 +106,7 @@ CNN 기반 메서드는 CNN 모델을 사용하여 features을 추출합니다.
 
 SIFT 기반 검색의 파이프 라인은 그림 2의 로컬 피쳐(Local feature) 추출에서 소개된다.
 
-![Fig. 2: Pipeline of the Bag-of-Words (BoW) model. For the three method types, feature detection and description are performed in different manners which will be described in Section 3. These local features are quantized to visual words pre-defined in a codebook (Section 4). The inverted index or feature encodings are used for retrieval efficiency, to be covered in Section 5.](https://ai2-s2-public.s3.amazonaws.com/figures/2017-08-08/6d902439b736a7546dd8872b307fb760087ca629/3-Figure2-1.png)
+![Fig. 2: Pipeline of the Bag-of-Words (BoW) model. For the three method types, feature detection and description are performed in different manners which will be described in Section 3. These local features are quantized to visual words pre-defined in a codebook (Section 4). The inverted index or feature encodings are used for retrieval efficiency, to be covered in Section 5.](https://user-images.githubusercontent.com/26589942/62159398-99c19d80-b34c-11e9-8bf8-9dcbeba2d551.png)
 
 우리가 N 개의 이미지로 구성된 갤러리 G를 가지고 있다고 가정합니다.
 feature detector가 주어지면, 우리는 희소한 관심 지점이나 조밀한 패치 주위의 지역에서 local descriptors를 추출합니다.
@@ -339,7 +339,7 @@ Zheng 등 [78]은 IDF의 관점에서 버스트 니스를 다루기위한 $$L_p$
 역 색인(inverted index)은 효율적인 저장 및 검색을 위해 설계되었으며 대개 대/중형 코드북에서 사용됩니다.
 그 구조는 그림 4에 나와있다.
 
-![SIFT Meets CNNì ëí ì´ë¯¸ì§ ê²ìê²°ê³¼](https://ai2-s2-public.s3.amazonaws.com/figures/2017-08-08/6d902439b736a7546dd8872b307fb760087ca629/10-Figure5-1.png)
+![SIFT Meets CNNì ëí ì´ë¯¸ì§ ê²ìê²°ê³¼](https://user-images.githubusercontent.com/26589942/62159544-f624bd00-b34c-11e9-93cb-a5f396c97253.png)
 역 색인(inverted index)은 각 엔트리가 코드북의 시각적 단어에 대응하는 1 차원 구조입니다.
 각 단어 항목에는 거꾸로 된 목록이 첨부되고, 거꾸로 된 각 목록에서 색인 된 목록은 색인 된 features 또는 postings 라고합니다.
 역 색인은 대형 코드북에서 시각적 단어 히스토그램의 sparse nature을 이용합니다. 
@@ -397,7 +397,7 @@ $$
 여기서, b (x1)와 b (x2)는 각각 f1과 f2의 HE 이진 벡터이고, H (·, ·)는 두 바이너리 벡터 간의 해밍 거리를 계산하며, $$\gamma$$는 가중 파라미터이다.
 그림 6에서 볼 수 있듯이 HE [13]와 그 가중 버전 [85]은 2008 년과 2010 년에 상당한 정확도를 향상시킵니다.
 
-![ê´ë ¨ ì´ë¯¸ì§](https://ask.qcloudimg.com/http-save/yehe-1342338/d4h98mcpp6.jpeg?imageView2/2/w/1620)
+![ê´ë ¨ ì´ë¯¸ì§](https://user-images.githubusercontent.com/26589942/62159606-15bbe580-b34d-11e9-8d1b-e3f89dc6f4a5.png)
 HE의 응용 프로그램에는 비디오 사본 탐지 [87], 이미지 분류 [88] 및 재 순위 지정 [89]이 포함됩니다.
 
 예를 들어, 이미지 분류에서 패치 매칭 유사성은 선형 커널 기반 SVM [88]에 통합 된 HE에 의해 효율적으로 추정된다.
