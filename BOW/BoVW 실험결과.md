@@ -1,13 +1,40 @@
 ## <BOVW 실험 1차 결과>
 #### glee1228@naver.com
 
-### **여기서 부터 BoVW 실험 결과입니다.**
+- [Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories](http://mplab.ucsd.edu/~marni/Igert/Lazebnik_06.pdf), CVPR2006
+
+### 논문의 실험 결과 
+
+![Phow1](../Image/Phow1.png)
+
+
+
+---
+
+
+
+### 구현한 코드 실험 결과(Best)
+
+Weak Features, M = 2500, Single, Level 0 (1x1),Linear SVM(C=100.0)
+### 31%
+Strong Feature, M = 600, Single, Level 0 (1x1),Linear SVM(C=200.0 and 250.0)
+
+### 40%
+
+
+
+---
+
+
+
+### 여기서 부터 BoVW 실험 결과입니다.
 
 Dataset : Caltech101
 Train/Test split: 4294/478
 SIFT Descriptor : Sparse(weak)
 K : 200
 Classifier : Rbf SVM
+
 ### accuracy : 27%
 >SVM Parameter :
 >0.041 (+/-0.019) for {'C': 1.0, 'gamma': 1.0}
@@ -68,6 +95,7 @@ Train/Test split: 3200/356
 SIFT Descriptor : Sparse(weak)
 K : 100
 Classifier : Linear SVM
+
 ### accuracy : 18%
 > 0.087 (+/-0.020) for {'C': 0.01}
 > 0.123 (+/-0.021) for {'C': 0.1}
@@ -147,6 +175,7 @@ Train/Test split: 3200/356
 SIFT Descriptor : Sparse(weak)
 K : 2500
 Classifier : Linear SVM
+
 ### accuracy : 31%
 > SVM Parameter : 
 > 0.288 (+/-0.027) for {'C': 10.0}
@@ -182,6 +211,7 @@ Train/Test split: 3200/356
 SIFT Descriptor : Dense(Strong)
 K : 600
 Classifier : Linear SVM
+
 ### accuracy : 40%
 > SVM Parameter : 
 > 0.400 (+/-0.025) for {'C': 100.0}
@@ -197,6 +227,7 @@ Train/Test split: 3200/356
 SIFT Descriptor : Dense(Strong)
 K : 700
 Classifier : Linear SVM
+
 ### accuracy : 40%
 >SVM Parameter : 
 >0.399 (+/-0.024) for {'C': 100.0}
@@ -212,6 +243,7 @@ Train/Test split: 3200/356
 SIFT Descriptor : Dense(Strong)
 K : 800
 Classifier : Linear SVM
+
 ### accuracy : 40%
 >SVM Parameter : 
 >0.082 (+/-0.022) for {'C': 0.01}
@@ -227,3 +259,21 @@ Classifier : Linear SVM
 >0.358 (+/-0.050) for {'C': 1000.0}
 
 ---
+
+Dataset : Caltech101
+Train/Test split: 3200/356
+SIFT Descriptor : Dense(Strong)
+K : 200
+Classifier : Linear SVM
+
+### accuracy : 38%
+
+> SVM Parameter : 
+>
+> 0.366 (+/-0.014) for {'C': 100.0}
+> 0.366 (+/-0.024) for {'C': 150.0}
+> 0.361 (+/-0.017) for {'C': 200.0}
+> 0.358 (+/-0.026) for {'C': 250.0}
+> 0.354 (+/-0.021) for {'C': 300.0}
+> 0.319 (+/-0.038) for {'C': 500.0}
+
