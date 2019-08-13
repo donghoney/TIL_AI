@@ -61,6 +61,7 @@ Train/Test split: 4294/478
 SIFT Descriptor : Sparse(weak)
 K : 230
 Classifier : Rbf SVM
+
 ### accuracy : 28%
 >SVM Parameter :
 >0.121 (+/-0.008) for {'C': 1.0, 'gamma': 10.0}
@@ -270,6 +271,11 @@ Classifier : Linear SVM
 
 > SVM Parameter : 
 >
+> 0.217 (+/-0.012) for {'C': 1.0}
+> 0.320 (+/-0.022) for {'C': 10.0}
+> 0.354 (+/-0.015) for {'C': 50.0}
+> 0.364 (+/-0.015) for {'C': 70.0}
+>
 > 0.366 (+/-0.014) for {'C': 100.0}
 > 0.366 (+/-0.024) for {'C': 150.0}
 > 0.361 (+/-0.017) for {'C': 200.0}
@@ -277,3 +283,27 @@ Classifier : Linear SVM
 > 0.354 (+/-0.021) for {'C': 300.0}
 > 0.319 (+/-0.038) for {'C': 500.0}
 
+
+
+---
+
+Dataset : Caltech101
+Train/Test split: 3200/356
+SIFT Descriptor : Sparse(Weak)
+K : 200
+Classifier : Linear SVM
+
+### accuracy : 26%
+
+> SVM Parameter : 
+>
+> 0.199 (+/-0.016) for {'C': 1.0}
+> 0.258 (+/-0.028) for {'C': 10.0}
+> 0.251 (+/-0.025) for {'C': 50.0}
+> 0.249 (+/-0.019) for {'C': 70.0}
+> 0.241 (+/-0.015) for {'C': 100.0}
+> 0.232 (+/-0.021) for {'C': 150.0}
+> 0.225 (+/-0.025) for {'C': 200.0}
+> 0.222 (+/-0.020) for {'C': 250.0}
+> 0.215 (+/-0.014) for {'C': 300.0}
+> 0.191 (+/-0.013) for {'C': 500.0}
