@@ -82,9 +82,9 @@
       * 1 Anchor, 1 Positive, (N-1) Negative Samples
       * N=2 인 경우 Triplet 과 동일한 모델이 된다.
 
-      ![deep_metric_n_pair_1](/Users/donghoon/GitHub/TIL_AI/Image/deep_metric_n_pair_1.png)
+      ![deep_metric_n_pair_1](../Image/deep_metric_n_pair_1.png)
 
-      ![deep_metric_n_pair_2](/Users/donghoon/GitHub/TIL_AI/Image/deep_metric_n_pair_2.png)
+      ![deep_metric_n_pair_2](../Image/deep_metric_n_pair_2.png)
 
   - Mini-Batch 안에서의 Pairs/Triplets로 구성되어 있어 Global Structure를 보지 못하는 문제를 개선
 
