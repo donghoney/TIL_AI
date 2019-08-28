@@ -2,6 +2,8 @@
 
 Author : **POSTECH**(Hyeonwoo Now, Bohyung Han) X **Google**(Andre Araujo, Tobias Weyand, Jack Sim)
 
+Link : https://arxiv.org/pdf/1612.06321.pdf
+
 
 
 ### Abstract 
