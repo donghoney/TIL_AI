@@ -17,7 +17,7 @@ glee1228@naver.com
 
 * **DELF**(**DE**ep **L**ocal **F**uture) 깊은 지역 특징이라는 이름의 대규모 이미지 검색에 적합한 local descriptor를 제안
 * 유용한 local feature를 식별하기 위해 descriptor와 keypoint 선택에 대한 Attention 매커니즘을 제안
-* Google Landmark 데이터셋 공개 
+* Google Landmark 데이터셋 공개
   * Background clutter, partial occlusion, multiple landmarks, variable scales를 가진 쿼리와 DB
 * global과 local descriptor의 sota를 outperform함.
 
@@ -105,16 +105,120 @@ glee1228@naver.com
 
 ### 4.2. Attention-based Keypoint Selection
 
-* 이미지 검색에 조밀하게 추출된 Feature들을 곧바로 사용하지 않고, feature subset을 선택하는 기법을 사용
+* 이미지 검색에 조밀하게 추출된 Feature들을 모두 사용하지 않고, feature subset을 선택하는 기법을 사용
 * 정확도와 계산 효율성을 위해 키포인트를 선택시킴
 
 
 
-### 4.2.1 Learning with Weak Supervision
+### 4.2.1 Learning with Weak Supervision(복습과 관련자료 학습 필요..)
 
 * Local feature Descriptor에 Attention 점수를 매기는 훈련방식을 제안
 * Attention Network에 의해 예측된 가중치(Weight)들의 합에 의해 Local feature는 pooling된다
-* 
+
+![delf_3](../../Image/delf_3.png)
+
+* 이 훈련 절차는 4.1의 학습 방법들(손실 함수, 데이터셋)과 유사하고 위의 그림(b)에 대한 설명이다.
+* 노란색 블록 부분 : Attention 부분
+  *  소프트맥스 기반의 랜드마크 분류기를 학습하기 위해 사용된 전체 이미지 데이터에 대한 임베딩을 만들어낸다.
+
+$$
+y = W \left( \sum_n\alpha(f_n;\theta)\cdot f_n\right), \qquad (1)
+$$
+
+* $$\alpha(f_n;\theta) $$ 는 각각 feature에 대한 score 함수이고 이 때 파라미터는 $$\theta$$ 가 된다.
+* output logit $$y$$ 는 feature 벡터들의 가중합에 의해 만들어 진다.
+* $$\mathbf{W}$$ 는 $$\mathbf{W} \in R^{M \times d}$$ ,  $$M$$ 은 클래스 갯수
+* cross entropy loss를 학습에 사용
+
+$$
+\mathcal{L} = -y^*\cdot \left( \frac{exp(y)}{1^Texp(y)}  \right), \qquad (2)
+$$
+
+* $$y $$ 는 원-핫 표현의 ground-truth이고, $$1$$ 은 한개의 벡터이다.
+
+* 스코어 함수 $$\alpha(\cdot )$$ 의 파라미터는 역전파에 의해 학습되며, 기울이는 다음과 같다. 
+
+$$
+\frac{\partial\mathcal{L}}{\partial\mathcal{\theta}}=\frac{\partial\mathcal{L}}{\partial y}\sum_n\frac{\partial y}{\partial\alpha_n}\frac{\partial\alpha_n}{\partial \theta}=\frac{\partial \mathcal{L}}{\partial y}\sum_nW\mathcal{f}_n\frac{\partial\alpha_n}{\partial\theta}, \qquad (3)
+$$
+
+* $$\theta$$ 에 대한 출력점수 $$\alpha_n \equiv \alpha(f_n;\theta)$$ 의 역전파는 기본 MLP와 동일하다. 
+
+* 여기서 $$\alpha(\cdot)$$ 은 음수가 되지 않도록 강제한다.
+
+* 실제로 score 함수 구현은 2개의 conv 레이어와 softplus 비선형 함수로 구현되어 있다.
+  * 이 때 1x1 conv 필터를 사용하게 된다.
 
 
 
+### 4.2.2 Training Attention
+
+* Descriptor와 Attention model 둘 다 **이미지-level로 학습**한다.
+* 하지만, 학습과정에서 까다로운 게 몇 가지 있다.
+  * feature representation과 score function이 joint하게(동시에) 역전파에 의해 학습될 수 있는데, 이 과정이 실질적으로 weak한 모델을 생성한다는 사실을 발견했다.
+* 그래서 **two-step 학습 전략**을 적용시켰고 다음과 같다.
+  1. Descriptor를 fine-tuning 한다.(4.1 참조)
+  2. Score function을 fixed된 descriptor 환경에서 학습시킨다.
+* 또 다른 기여(contribution)도 있는데, 그건 attention 학습할 때, **random하게 이미지를 rescaling하는 것**이다.
+  * Attention model이 scale invariant하게 돕는다.
+  * **Random Rescale** 과정은 다음과 같다.
+    1. 처음 정방형 이미지를 만들기 위해 가운데를 center-crop하고, 900 x 900 로 rescale한다.
+    2. 그리고 720 x 720 크기로 랜덤하게 crop한다.
+    3. 마지막으로 임의로 $$y \le 1$$ 범위로 rescale한다.
+
+
+
+### 4.2.3 Characteristics
+
+* 비전통적인 측면의 키포인트 선택은 **Descriptor 추출 후 키포인트 선택**이 이루어진다.
+  * 키포인트가 먼저 감지되어 나중에 설명되는 기존 기술(**SIFT 및 LIFT**)과는 다르다.
+* 기존 키포인트 탐지기는 low-level feature 기반으로 반복적인 키포인트를 감지하는 데 중점을 둠
+  * 그러나, **이미지 검색과 같은 high-level의 인식 작업에서는 서로 다른 인스턴스(객체)를 구분할 수 있는 키포인트를 선택하는 게 중요하다.**
+* 제안된 방법은 feature map으로부터 이전보다 높은 수준의 정보들을 가려낸다.
+
+
+
+### 4.3. Dimensionality Reduction
+
+* 검색 정확도를 개선시기 위해, 선택된 feature들의 차원을 줄인다.
+* L2 norm을 적용 후 PCA로 40차원까지 줄인다.
+* 마지막으로, 다시 L2 norm를 거친다.
+
+
+
+### 4.4. Image Retrieval System
+
+* 쿼리와 DB 데이터로부터 Descriptor를 추출한다
+  * 여기서, 가장 높은 Attention Score를 가진 local feature의 개수를 가진 이미지이다.
+* 검색 시스템은 nearest neighbor search를 기반으로 하고, KD-tree와 Product Quantization(PQ)의 콤비네이션으로 구현.
+* PQ를 사용해서, 40-dim의 feature descriptor를 50bit로 인코딩.
+  * 40-dim feature descriptor를 10개의 동일 차원 서브벡터로 나눈다
+  * 서브 벡터당 32($$2^5$$)개의 중심점을 정하고 k-means 클러스터링을 시행하여 50bit($$2^{50}$$)로 인코딩한다.
+
+* Nearest neighbor 검색 정확도 향상
+  * Query Descriptor가 인코딩 되지 않은 Asymmetric Distance를 계산한다.
+* Nearest neighbor 검색 속도 향상
+  * 8K 코드북 사용, Descriptor에 대한 inverted index 구성
+  * 인코딩 오류를 줄이기 위해, KD-Tree를 사용하여 voronoi cell을 분할하고 30K개 feature들보다 적은 subtree에 지역적으로 최적화 된 PQ를 사용한다.
+  * 쿼리에서 추출된 Local Descriptor에 Approximate nearest neighbor 검색을 수행한 뒤, 가장 가까운 K개의 local Descriptor에 대해 데이터베이스 이미지당 모든 매치되는 것들을 합한다. 
+  * 마지막으로, RANSAC 알고리즘을 사용해서 Geometric verification하고, 검색된 이미지에 대한 score를 inlier인 개수로 한다. 이 단계에서 많이 걸러진다.
+* 구글 랜드마크 데이터셋에 10억 개의 Desciptor를 indexing하기 위해 8GB 메모리보다 더 적게 필요하다.
+* Nearest Neighbor Search 작업에서 CPU 하나를 사용해서 2초보다 적게 걸린다.
+
+* 각 쿼리에 5개 중심을 소프트 할당하고 각 inverted index tree에서 최대 10K개의 리프 노드들을 검색한다.(이 부분 이해가 안됐음)
+
+
+
+### 5. Experiments
+
+* 기존의 Global과 local Feature들을 DELF 성능과 비교하는 부분
+* 그리고 기존 데이터셋에 DELF를 적용시켜 얼마나 좋은 성능이 나오는지 보여줌.
+
+
+
+### 5.1. Implementation Details
+
+* Multi-scale Descriptor Extraction(다중 스케일 디스크립터 추출)
+
+* Training
+* Parameters
