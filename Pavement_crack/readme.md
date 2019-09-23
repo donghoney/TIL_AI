@@ -97,7 +97,7 @@ Detail : https://www.tu-ilmenau.de/neurob/data-sets-code/gaps/
 
 2. Download using Python
 
-<img src="image/GAPsV2_1.png" alt="GAPsV2_2" style="zoom:50%;" />
+<img src="Image/GAPsV2_1.png" alt="GAPsV2_2" style="zoom:50%;" />
 
 
 
@@ -135,7 +135,7 @@ Offered in 50k subset (500Mb)
 
 ---
 
-<img src="image/GAPsV2_2.png" alt="GAPsV2_2" style="zoom:50%;" />
+<img src="Image/GAPsV2_2.png" alt="GAPsV2_2" style="zoom:50%;" />
 
 
 
@@ -221,4 +221,3 @@ Offered in 50k subset (500Mb)
   
 
   <img src="Image/Experiment_3.png" alt="Experiment_1" style="zoom:50%;" />
-
