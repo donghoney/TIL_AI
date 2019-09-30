@@ -107,8 +107,6 @@ Detail : https://www.tu-ilmenau.de/neurob/data-sets-code/gaps/
 
 **German Aspalt Pavement Distress Dataset**
 
----
-
 Total 2468 Gray Images(8bit)
 
 1920 x 1080 pixel Size
