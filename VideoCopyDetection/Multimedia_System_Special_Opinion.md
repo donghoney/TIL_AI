@@ -1,10 +1,8 @@
-## 멀티미디어시스템 특론
+## Multimedia System
 
-**강의 주제** : Contents-based Near Duplicated Video Copy Detection 
+**주제** : Contents-based Near Duplicated Video Copy Detection 
 
-**강의 목표 ** : 저작권이 있는 원본 동영상을 불법 유통을 위하여 다양한 변형(좌우 변환, 밝기 조정, Caption 삽입, Picture to Picture, 좌우 flipping, 재인코딩 등)을 가한 동영상에 대하여 해당 원본 동영상을 검색할 수 있는 방법
-
-
+**목표 ** : 저작권이 있는 원본 동영상을 불법 유통을 위하여 다양한 변형(좌우 변환, 밝기 조정, Caption 삽입, Picture to Picture, 좌우 flipping, 재인코딩 등)을 가한 동영상에 대하여 해당 원본 동영상을 검색할 수 있는 방법
 
 **교과 내용** 
 
@@ -26,20 +24,6 @@
 |  14  |               GPU를 이용한 병렬 검색 방법 (1)                |           |
 |  15  |               GPU를 이용한 병렬 검색 방법 (2)                |           |
 |  16  |                      Team-Project 발표                       |           |
-
-
-
-**교재**
-
-최근 연구 논문을 중심으로 세미나 및 토론 진행
-
-
-
-**시험 및 평가 방법**
-
-가. 발표 : 50%  
-
-나. Team Project : 50%
 
 
 
@@ -76,13 +60,13 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
 
 #### 유사 비디오 검색 처리과정
 
-![mm_1](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_1.png)
+![mm_1](Image/mm_1.png)
 
 
 
 #### 비디오 copy detection
 
-![mm_2](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_2.png)
+![mm_2](Image/mm_2.png)
 
 
 
@@ -117,7 +101,7 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
 
 ### Video Fingerprint의 유형
 
-![mm_3](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_3.png)
+![mm_3](Image/mm_3.png)
 
 * Spatial Signature : 하나의 frame에서 특징
 * Temporal Signature : frame sequence에서 특징
@@ -126,7 +110,7 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
 
 ### Fingerprinting의 구분
 
-![mm_4](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_4.png)
+![mm_4](Image/mm_4.png)
 
 * 묘사나 검출과 같은 low level의 process에서는 Global한 접근과 Local한 접근이 있다.
 
@@ -136,12 +120,12 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
 
 * 프레임 전체
 
-  * ![mm_5](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_5.png)
+  * ![mm_5](Image/mm_5.png)
   * ex) Color histogram(색상 히스토그램)
 
 * Block 기반
 
-  * ![mm_6](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_6.png)
+  * ![mm_6](Image/mm_6.png)
 
   1. Block 밝기값의 평균
   2. 평균 block강도의 순위(1,2,3,4,5....)
@@ -151,7 +135,7 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
 
 * 관심점(points of interest)
 
-  * ![mm_7](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_7.png)
+  * ![mm_7](Image/mm_7.png)
   * Corner Feature(Harris Corner Detector)
   * Scale-space feature
   * SIFT
@@ -160,21 +144,21 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
 
 ### Spatial Signature의 비교
 
-* ![mm_8](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_8.png)
+* ![mm_8](Image/mm_8.png)
 
 
 
 ### fingerprint 검색의 복잡도
 
 * 철저한 검색은 선형적으로 검색 or $$O(K*N)$$
-  * ![mm_10](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_10.png)
+  * ![mm_10](Image/mm_10.png)
   * N = reference fingerprint DB
   * N = M*L로 분해될 수 있음
   * L = DB의 video fingerprint의 평균 길이
   * K = 쿼리 video 길이
 
 * Sequence Matching의 예시
-  * ![mm_9](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_9.png)
+  * ![mm_9](Image/mm_9.png)
 
 
 
@@ -214,9 +198,9 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
 
 ### 비디오 식별 방법과 실험 요약
 
-![mm_11](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_11.jpg)
+![mm_11](Image/mm_11.jpg)
 
-![mm_12](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_12.jpg)
+![mm_12](Image/mm_12.jpg)
 
 
 
@@ -267,15 +251,15 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
     * 380 차원들(32 평균 강도들 + 348 평균 차이들)
     * 3 level에 quantize함.
 
-  ![mm_13](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_13.jpg)
+  ![mm_13](Image/mm_13.jpg)
 
-  ![mm_14](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_14.jpg)
+  ![mm_14](Image/mm_14.jpg)
 
-  ![mm_15](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_15.jpg)
+  ![mm_15](Image/mm_15.jpg)
 
-  ![mm_16](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_16.png)
+  ![mm_16](Image/mm_16.png)
 
-  ![mm_17](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_17.jpg)
+  ![mm_17](Image/mm_17.jpg)
 
 * Words
 
@@ -287,7 +271,7 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
       * 5개의 subset, 각 subset당 5개의 elements
         * 380개 중에서 총 25개의 값을 선택
 
-![mm_18](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_18.png)
+![mm_18](Image/mm_18.png)
 
 **학습을 통해서 Approximation 속도를 개선시키는 방법이 있는지에 대해 고민해볼 것** - Large-Image Search
 
@@ -305,7 +289,7 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
 
     * 낮은 신뢰도 측정은 프레임이 거의 없거나 정보가 거의 없는 평평한 이미지임을 보여준다.
 
-  ![mm_19](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_19.png)
+  ![mm_19](Image/mm_19.png)
 
 
 
@@ -318,7 +302,7 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
   * 순서가 없는(orderless) 문서 요약
   * 문서의 단어의 빈도 수, Salton $ McGill(1983)
 
-  ![mm_20](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_20.png)
+  ![mm_20](Image/mm_20.png)
 
 
 
@@ -331,15 +315,15 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
   \end{cases}
   $$
 
-* ![mm_21](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_21.png)
+* ![mm_21](Image/mm_21.png)
 
 
 
 * Coarse signature들은 90-frame segment에 대해 생성되지만, 45-frame은 중복된다.
-* ![mm_22](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_22.png)
-* ![mm_23](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_23.png)
+* ![mm_22](Image/mm_22.png)
+* ![mm_23](Image/mm_23.png)
 
-* ![mm_24](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_24.png)
+* ![mm_24](Image/mm_24.png)
 
 
 
@@ -363,7 +347,7 @@ Video Abstraction(비디오 추상화) : 긴 문서 내용의 콘텐츠를 요�
     * video signature 하나의 모든 temporal segment들을 다른 하나의 Video Signature의 모든 temporal Segment와 비교합니다.
     * 두 세그먼트 f1과 f2에 대해서 각각의 BOW histogram를 비교하여 평가합니다. 평가방식은 Jaccard distance 입니다.
 
-  ![mm_25](/Users/donghoon/공부자료/5학년1학기/멀티미디어시스템특론(서강대)/Image/mm_25.png)
+  ![mm_25](Image/mm_25.png)
 
   
 
