@@ -223,3 +223,54 @@ Offered in 50k subset (500Mb)
   
 
   <img src="Image/Experiment_3.png" alt="Experiment_1" style="zoom:50%;" />
+  
+* ## Compare by dataset
+
+  **(train MUHAN , test :  1. GAPs384 , 2. MUHAN , 3. MUHAN+GAPs384)**
+
+![Experiment_4](Image/Experiment_4.png)
+
+![Experiment_5](Image/Experiment_5.png)
+
+![Experiment_6](Image/Experiment_6.png)
+
+![Experiment_7](Image/Experiment_7.png)
+
+![Experiment_8](Image/Experiment_8.png)
+
+
+
+## HED Network Description
+
+![holistically-nested edge detection iccv에 대한 이미지 검색결과](https://d3i71xaburhd42.cloudfront.net/3c8db2ca155ce4e15ec8a2c4c4b979de654fb296/4-Figure3-1.png)
+
+
+
+구조는 위의 이미지와 같다.
+
+네트워크의 아이디어는 scale pyramid를 통해 좋은 하나의 결과를 만들자이다.
+
+여러개의 receptive field size로 convolution을 하는데, 병렬적으로 하지 않고, 직렬로 한다.
+
+따라서, 첫번째에서 뽑은 feature를 토대로 두 번째, 세 번째 차례로 점점 더 중요하게 여길 부분을 공략하게 만든다.
+
+Receptive field가 점점 커지기 때문에, 레이어마다 출력 feature 크기는 작지만, 선형 보간을 이용해 입력 이미지와 동일한 크기로 키워서 차곡차곡 겹치게 한 후, convolution을 시행하여 최종 결과물을 만든다.
+
+
+
+각 레이어의 feature마다 sigmoid함수 출력 값(0~1)을 합하여 back-pro한다.
+
+이 모델을 Pavement crack detection 도메인에 적용시키면서 성능을 개선시키고자 한 Feature Pyramid Hierarchical boosting Network(FPHBN) 이 있다.
+
+https://arxiv.org/abs/1901.06340
+
+![HED_FPHBN](Image/FPHBN_1.png)
+
+
+
+중간 side output 결과 이전에 feature pyramid를 삽입해 마지막 레이어에서 강한 영향을 받는 기존 HED 모델을 개선시켰다. 못 알아보던 feature들을 더 잘 알아 볼 수 있게 공략하는 것이다.
+
+![FPHBN_6](Image/FPHBN_6.png)
+
+중간 feature pyramid를 확대해 보면, 위 이미지와 같다.
+
