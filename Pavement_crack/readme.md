@@ -242,7 +242,7 @@ Offered in 50k subset (500Mb)
 
 ## HED Network Description
 
-![holistically-nested edge detection iccv에 대한 이미지 검색결과](https://d3i71xaburhd42.cloudfront.net/3c8db2ca155ce4e15ec8a2c4c4b979de654fb296/4-Figure3-1.png)
+![holistically-nested edge detection](Image/HED_1.png)
 
 
 
@@ -258,7 +258,15 @@ Receptive field가 점점 커지기 때문에, 레이어마다 출력 feature �
 
 
 
-각 레이어의 feature마다 sigmoid함수 출력 값(0~1)을 합하여 back-pro한다.
+각 레이어의 feature마다 sigmoid함수 출력 값(0~1)을 합하여 back-prop한다.
+
+
+
+![holistically-nested edge detection](Image/HED_2.png)
+
+HED의 성능 평가 결과는 해당 논문에서 제시한 표에서 확인할 수 있다.
+
+
 
 이 모델을 Pavement crack detection 도메인에 적용시키면서 성능을 개선시키고자 한 Feature Pyramid Hierarchical boosting Network(FPHBN) 이 있다.
 
