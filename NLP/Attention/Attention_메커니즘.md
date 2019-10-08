@@ -1,3 +1,5 @@
+
+
 ## 밑바닥부터 이해하는 어텐션 메커니즘(Attention Mechanism)
 
 glee1228@naver.com
@@ -45,7 +47,6 @@ $$x_1 = [1,0,0,0]$$ 입니다. 이를 기반으로 $$h_1 = [0.3,-0.1,0.9]$$ 를 
 바로 위의 단계를 반복하는 과정을, 순전파(forward propagation)이라고 합니다.
 
 <video src="https://jalammar.github.io/images/RNN_1.mp4"/>
-
 정답을 알려줘야 모델이 parameter를 적절하게 갱신해나가기 떄문에, h의 정답은 e, e의 정답은 l, l의 정답은 l, l의 정답은 o로 줍니다.
 
 
@@ -130,11 +131,8 @@ Decoder는 Context Vector를 읽어 출력 시퀀스를 생성합니다.
 6. 시퀀스 종료 문자를 생성하거나 끝 문자에 도달할 때까지 앞의 과정을 반복합니다.
 
 <video src="https://jalammar.github.io/images/seq2seq_3.mp4" />
-
 <video src="https://jalammar.github.io/images/seq2seq_4.mp4"/>
-
 <video src="https://jalammar.github.io/images/seq2seq_5.mp4"/>
-
 > 영상 출처 : https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/
 
 **Seq2Seq의 장점**
@@ -169,7 +167,6 @@ Decoder는 Context Vector를 읽어 출력 시퀀스를 생성합니다.
 아래 영상은 Seq2Seq2+Attention 모델의 데이터 흐름과 Encoder가 Decoder에 어떤 데이터를 전달하는지를 보여줍니다.
 
 <video src="https://jalammar.github.io/images/seq2seq_7.mp4"/>
-
 >  출처 : https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/
 
 
@@ -205,7 +202,6 @@ Step 5번째의 첫 Decoder의 hidden state를 준비해줍니다.
 <video src="https://jalammar.github.io/images/attention_process.mp4"/>
 
 
-
 >  출처 : https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/
 
 ### 
@@ -214,3 +210,171 @@ Step 5번째의 첫 Decoder의 hidden state를 준비해줍니다.
 
 
 
+## Visual Attention
+
+* A. Karpathy and L. Fei-Fei (2015), "Deep Visual-Semantic Alignments for Generating Image Descriptions," CVPR
+* I K. Xu et al. (2015), "Show, Attend and Tell: Neural Image Caption Generation with Visual Attention," ICML
+
+
+
+### 단어-이미지 정렬 학습
+
+* Raw Image 를 입력하면, 사이즈가 K인 사전으로부터 단어들의 시퀀스 A를 출력합니다.
+
+* $$
+  {y_1,...,y_c},y_i \in \R^K
+  $$
+
+* 
+
+![VisualAttention_1](../../Image/VisualAttention_1.jpeg)
+
+**Encoder : D-차원의 feature vector를 추출하는데 CNN을 사용**
+$$
+a = [a_1,...,a_L] \in \R^{L\times D}
+$$
+max pooling 하기 전의 lower conv layer의 output인 $$L_1 \times L_2 \times D ( L = L_1 \times L_2)$$ 이다.
+
+
+
+**Decoder : context vector, 이전 hidden state, 그리고 이전에 생성된 words에서 매 스텝마다 한 단어를 생성하는 캡션을 생성하기 위한 용도로 Attention 모듈을 사용한 RNN을 사용** 
+
+
+
+![VisualAttention_1](../../Image/VisualAttention_2.png)
+
+
+
+
+
+## Google Transformer
+
+*  A. Vaswani et al. (2017), "Attention is all you need," NIPS
+
+
+
+RNN : 순차 연산(Decoder안의 스스로 교정하는 형태의 모델)은 비용이 많이 들고 평행이 쉽지 않습니다.
+
+CNN : ByteNet , ConvS2S 와 같은 긴 term의 dependency들을 잡아내기 위한 많은 레이어를 필요로 합니다.
+
+
+
+### ByteNet
+
+* N. Kalchbrenner et al. (2017), "Neural machine translation in linear time" 
+
+<img src="../../Image/ByteNet.png" alt="image-20191008161035096" style="zoom:50%;" />
+
+### ConvS2S
+
+* J. Gehring et al. (2017), "Convolutional sequence to sequence learning" 
+
+<img src="../../Image/ConvS2S.png" alt="image-20191008161139051" style="zoom:50%;" />
+
+
+
+
+
+### Transformer
+
+<img src="../../Image/Transformer_1.png" alt="image-20191008161415471" style="zoom:50%;" />
+
+
+
+Transformer = encoder + decoder
+
+Encoder or decoder = attention + positional encoding + feedforward net
+
+
+
+### Scaled Dot-Product Attention
+
+$$
+Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{D_K}}) V \in \R^{N\times D_v}
+\\
+Queries : Q \in \R^{N\times D_k},q_i\in\R^{1\times D_k}
+\\
+Keys : K \in \R ^{N \times D_k} , k_i \in \R^{1\times D_k}
+\\
+Values : V \in \R^{N \times D_v} , v_i \in \R^{1 \times D_v}
+$$
+
+예를 들어, 쿼리 $$q_i$$ 에 대한 Attention은 
+$$
+\sum_{n=1}^N\left( \frac{exp(q_ik_n^T /\sqrt D_k)}{\sum_{j=1}^{N}exp(q_jk_n^T / \sqrt D_k)}\right)v_n
+$$
+이다.
+
+Self-Attention : Queries, Keys 그리고 Values는 동일한 시퀀스.
+
+
+
+### Multi-Head Attention
+
+모델이 서로 다른 위치에서 서로 다른 표현 하위 영역의 정보를 공동으로 참조할 수 있도록 하는 역할
+$$
+\begin{matrix}
+MultiHead(Q,K,V)  &=&  \textbf{Concat}(head_1,...,head_h)W^O,
+\\
+head_i &=& \textbf{Attention}(QW_i^Q,KW_i^K,VW_i^V)
+\end{matrix}
+$$
+매개변수 행렬을 통해 선형 투영이 수행되는 경우
+
+
+$$
+\begin{matrix}
+W_i^Q \in \R^{D_{model}\times D_q}&,& W_i^K \in \R^{D_{model}\times D_k},
+\\
+W_i^V \in \R^{D_{model}\times D_v}&,& W_i^O \in \R^{hD_v\times D_{model}},
+\end{matrix}
+$$
+
+
+여기서 h = 8은 병렬로 된 Attention layer의 수입니다.
+
+
+
+### Attention in Encoder and Decoder
+
+* Encoder : 
+  * Self-Attention layer를 포함
+  * encoder안의 각각 position은 encoder 이전 레이어안의 모든 position을 참조
+* Decoder:
+  * Self-Attention layer를 포함
+  * encoder안의 각각 position은 encoder 이전 레이어안의 모든 position을 참조
+  * Need to prevent leftward flow in the decoder to preserve the auto-regressive property.
+
+* Encoder-decoder Attention :
+  * Queries 는 이전 decoder layer에서 오고, keys / values는 encoder의 output에서 옵니다.
+  * decoder에서 모든 position은 input sequence안 모든 position을 참조합니다.
+  * Seq2seq 학습에서 encoder-decoder Attentio을 모방
+
+
+
+### Position-wise Feedforward Networks
+
+* 각 위치에 개별적으로 동일하게 적용합니다.
+
+* 단일 hidden layer와 함께 FF net
+  $$
+  FFN(x) = max(0,xW_1 + b_1)W_2+b_2
+  $$
+  여기서 $$x \in R^{512}$$ 와 hidden 유닛들의 숫자는 2048
+
+  
+
+### Positional Encoding
+
+* 시퀀스의 token들의 상대적이고 절대적인 위치에 대한 정보를 부여
+* Positional Encoding vector를 input embedding vector에 더하기
+* 이 부분은 더 공부할 필요가 있습니다.
+* pos마다 다른 pos와 구분되는 positional encoding 값을 얻기위해 sin, cos 함수를 사용했다고 합니다.
+
+
+
+### Transformer Algorithm Flow Visualization
+
+![transform_gif](../../Image/transform_gif.gif)
+
+출처 : https://mchromiak.github.io/articles/2017/Sep/12/Transformer-Attention-is-all-you-need
